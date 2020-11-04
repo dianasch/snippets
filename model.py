@@ -93,10 +93,14 @@ class Album(db.Model):
     thumbnail_path = db.Column(db.String(2000))
 
     # Create table column for album details as a text
-    details = db.Column(db.Text)
+    # Required field
+    details = db.Column(db.Text,
+                        nullable = False)
 
     # Create table column for full album lyrics as text
-    full_lyrics = db.Column(db.Text)
+    # Required field
+    full_lyrics = db.Column(db.Text,
+                        nullable = False)
 
     # Create table column for artist_id as an integer
     # Define foreign key from artists table on artist_id
@@ -122,23 +126,46 @@ class Song(db.Model):
     song_id = db.Column(db.Integer,
                         primary_key = True,
                         autoincrement = True)
-    
+
+    # Create table column for song title as a string
+    # Max limit of 50 chars, required field
+    title = db.Column(db.String(50),
+                        nullable = False)
+
     # Create table column for album_id as an integer
     # Define foreign key from albums table on album_id
     # Required field
     album_id = db.Column(db.Integer,
                         db.ForeignKey("albums.album_id"),
                         nullable = False)
-
-    # Create table column for song title as a string
-    # Max limit of 50 chars, required field
-    title = db.Column(db.String(50),
-                        nullable = False)
     
     # Method to identify each Song instance
     def __repr__(self):
 
         return f"<Song song_id={self.song_id} title={self.title}>"
+
+
+class Snippet(db.Model):
+    """A song snippet generated using a Markov chain. Subclass of db.Model."""
+
+    # Set table name as `snippets` for Snippet objects
+    __tablename__ = "snippets"
+
+    # Create table column for snippet_id as an integer
+    # This is the primary key for snippets table
+    snippet_id = db.Column(db.Integer,
+                        primary_key = True,
+                        autoincrement = True)
+
+    # Create table column for snippet text as text
+    # Required field
+    text = db.Column(db.Text,
+                        nullable = False)
+    
+    # Method to identify each Snippet instance
+    def __repr__(self):
+
+        return f"<Snippet snippet_id={self.snippet_id} text={self.text}>"
 
 
 # if __name__ == '__main__':

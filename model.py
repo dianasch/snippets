@@ -42,6 +42,8 @@ class User(db.Model):
     password = db.Column(db.String(20),
                         nullable = False)
 
+    # snippets = a list of Snippet objects
+
     # Method to identify each User instance
     def __repr__(self):
 
@@ -64,6 +66,8 @@ class Artist(db.Model):
     # Max limit of 100 chars, required field
     name = db.Column(db.String(100),
                         nullable = False)
+
+    # albums = a list of Album objects
     
     # Method to identify each Artist instance
     def __repr__(self):
@@ -109,6 +113,12 @@ class Album(db.Model):
                         db.ForeignKey("artists.artist_id"),
                         nullable = False)
 
+    # Create SQLAlchemy relationship between artists and albums
+    artist = db.Relationship('Artist', backref='albums')
+
+    # songs = a list of Song objects
+    # snippets_albums = a list of Snippets_Albums objects
+
     # Method to identify each Album instance
     def __repr__(self):
 
@@ -138,6 +148,9 @@ class Song(db.Model):
     album_id = db.Column(db.Integer,
                         db.ForeignKey("albums.album_id"),
                         nullable = False)
+
+    # Create SQLAlchemy relationship between albums and songs
+    album = db.relationship('Album', backref='songs')
     
     # Method to identify each Song instance
     def __repr__(self):
@@ -161,6 +174,18 @@ class Snippet(db.Model):
     # Required field
     text = db.Column(db.Text,
                         nullable = False)
+
+    # Create table column for user_id as an integer
+    # Define foreign key from users table on user_id
+    # Required field
+    user_id = db.Column(db.Integer,
+                        db.ForeignKey("users.user_id"),
+                        nullable = False)
+
+    # snippets_albums = a list of Snippets_Albums objects
+
+    # Create SQLAlchemy relationship between users and snippets
+    user = db.Relationship('User', backref='snippets')
     
     # Method to identify each Snippet instance
     def __repr__(self):
@@ -194,6 +219,12 @@ class Snippet_Album(db.Model):
     album_id = db.Column(db.Integer,
                         db.ForeignKey("albums.album_id"),
                         nullable = False)
+
+    # Create SQLAlchemy relationship between snippets and snippets_albums
+    snippet = db.Relationship('Snippet', backref='snippets_albums')
+
+    # Create SQLAlchemy relationship between albums and snippets_albums)
+    album = db.Relationship('Album', backref='snippets_albums')
     
 
 if __name__ == '__main__':

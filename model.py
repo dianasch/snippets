@@ -63,7 +63,7 @@ class Artist(db.Model):
     # Create table column for artist name as a string
     # Max limit of 100 chars, required field
     name = db.Column(db.String(100),
-                            nullable = False)
+                        nullable = False)
     
     # Method to identify each Artist instance
     def __repr__(self):
@@ -86,7 +86,7 @@ class Album(db.Model):
     # Create table column for album title as a string
     # Max limit of 50 chars, required field
     title = db.Column(db.String(50),
-                    nullable = False)
+                        nullable = False)
 
     # Create table column for album thumbnail path as a string
     # Max limit of 2000 chars
@@ -102,10 +102,46 @@ class Album(db.Model):
     # Define foreign key from artists table on artist_id
     # Required field
     artist_id = db.Column(db.Integer,
-                            db.ForeighKey("artists.artist_id"),
-                            nullable = False)
+                        db.ForeignKey("artists.artist_id"),
+                        nullable = False)
 
     # Method to identify each Album instance
     def __repr__(self):
 
         return f"<Album album_id={self.album_id} title={self.title}>"
+
+
+class Song(db.Model):
+    """A song. Subclass of db.Model."""
+
+    # Set table name as `songs` for Song objects
+    __tablename__ = "songs"
+
+    # Create table column for song_id as an integer
+    # This is the primary key for songs table
+    song_id = db.Column(db.Integer,
+                        primary_key = True,
+                        autoincrement = True)
+    
+    # Create table column for album_id as an integer
+    # Define foreign key from albums table on album_id
+    # Required field
+    album_id = db.Column(db.Integer,
+                        db.ForeignKey("albums.album_id"),
+                        nullable = False)
+
+    # Create table column for song title as a string
+    # Max limit of 50 chars, required field
+    title = db.Column(db.String(50),
+                        nullable = False)
+    
+    # Method to identify each Song instance
+    def __repr__(self):
+
+        return f"<Song song_id={self.song_id} title={self.title}>"
+
+
+# if __name__ == '__main__':
+#     from server import app
+
+#     connect_to_db(app)

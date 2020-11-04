@@ -62,11 +62,50 @@ class Artist(db.Model):
 
     # Create table column for artist name as a string
     # Max limit of 100 chars, required field
-    artist_name = db.Column(db.String(100),
+    name = db.Column(db.String(100),
                             nullable = False)
     
     # Method to identify each Artist instance
     def __repr__(self):
 
-        return f"""<Artist user_id={self.artist_id}
-                    artist_name={self.artist_name}>"""
+        return f"<Artist artist_id={self.artist_id} name={self.name}>"
+
+
+class Album(db.Model):
+    """A music album. Subclass of db.Model."""
+
+    # Set table name as `albums` for Album objects
+    __tablename__ = "albums"
+
+    # Create table column for album_id as an integer
+    # This is the primary key for albums table
+    album_id = db.Column(db.Integer,
+                        primary_key = True,
+                        autoincrement = True)
+
+    # Create table column for album title as a string
+    # Max limit of 50 chars, required field
+    title = db.Column(db.String(50),
+                    nullable = False)
+
+    # Create table column for album thumbnail path as a string
+    # Max limit of 2000 chars
+    thumbnail_path = db.Column(db.String(2000))
+
+    # Create table column for album details as a text
+    details = db.Column(db.Text)
+
+    # Create table column for full album lyrics as text
+    full_lyrics = db.Column(db.Text)
+
+    # Create table column for artist_id as an integer
+    # Define foreign key from artists table on artist_id
+    # Required field
+    artist_id = db.Column(db.Integer,
+                            db.ForeighKey("artists.artist_id"),
+                            nullable = False)
+
+    # Method to identify each Album instance
+    def __repr__(self):
+
+        return f"<Album album_id={self.album_id} title={self.title}>"

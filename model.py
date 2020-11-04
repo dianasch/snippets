@@ -4,7 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
-def connect_to_db(flask_app, db_uri='postgresql:///snippet'), echo=True):
+def connect_to_db(flask_app, db_uri='postgresql:///snippets', echo=True):
     """Connect Flask app with database."""
 
     flask_app.config['SQLALCHEMY_DATABASE_URI'] = db_uri
@@ -168,7 +168,35 @@ class Snippet(db.Model):
         return f"<Snippet snippet_id={self.snippet_id} text={self.text}>"
 
 
-# if __name__ == '__main__':
-#     from server import app
+class Snippet_Album(db.Model):
+    """An intermediate class between snippets and albums.
+    Subclass of db.Model."""
 
-#     connect_to_db(app)
+    # Set table name as `snippets_albums` for Snippet_Album objects
+    __tablename__ = "snippets_albums"
+
+    # Create table column for snippet_album_id as an integer
+    # This is the primary key for snippets_albums table
+    snippet_album_id = db.Column(db.Integer,
+                        primary_key = True,
+                        autoincrement = True)
+
+    # Create table column for snippet_id as an integer
+    # Define foreign key from snippets table on snippet_id
+    # Required field
+    album_id = db.Column(db.Integer,
+                        db.ForeignKey("snippets.snippet_id"),
+                        nullable = False)
+
+    # Create table column for album_id as an integer
+    # Define foreign key from albums table on album_id
+    # Required field
+    album_id = db.Column(db.Integer,
+                        db.ForeignKey("albums.album_id"),
+                        nullable = False)
+    
+
+if __name__ == '__main__':
+    from server import app
+
+    connect_to_db(app)

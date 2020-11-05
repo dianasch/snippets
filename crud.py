@@ -39,7 +39,7 @@ def create_artist(name):
     db.session.add(artist)
     db.session.commit()
 
-    return user
+    return artist
 
 def return_all_artists():
     """Return a list of all artists."""
@@ -53,3 +53,23 @@ def get_artist_by_id(artist_id):
 
 # ALBUM FUNCTIONS
 
+def create_album(title, thumbnail_path, details, full_lyrics, artist):
+    """Create and return a new album."""
+
+    album = album(title=title, thumbnail_path=thumbnail_path, details=details,
+                    full_lyrics=full_lyrics, artist=artist)
+
+    db.session.add(album)
+    db.session.commit()
+
+    return album
+
+def return_all_albums():
+    """Return a list of all albums."""
+
+    return Album.query.all()
+
+def get_album_by_id(album_id):
+    """Get album by album_id."""
+
+    return Album.query.get(album_id)

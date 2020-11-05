@@ -73,3 +73,26 @@ def get_album_by_id(album_id):
     """Get album by album_id."""
 
     return Album.query.get(album_id)
+
+# SONG FUNCTIONS
+
+def create_song(title, album):
+    """Create and return a new song."""
+
+    song = Song(title=title, album=album)
+
+    db.session.add(song)
+    db.session.commit()
+
+    return song
+
+def return_all_songs():
+    """Return a list of all songs."""
+
+    return Album.query.all()
+
+def get_song_by_id(song_id):
+    """Get song by song_id."""
+
+    return Song.query.get(song_id)
+

@@ -40,4 +40,24 @@ for i in range(len(albums_dict["album"])):
         print(albums_dict["album"][i]["strAlbum"])
 
 
+# Loop through a range the length of number of albums listed in albums_dict
+for i in range(len(albums_dict["album"])):
+
+    # Determine if album is a studio album
+    if albums_dict["album"][i]["strAlbum"] in studio_albums:
+
+        # Print album thumbnail path
+        print(albums_dict["album"][i]["strAlbumThumb"])
+
+
+# Loop through a range the length of number of albums listed in albums_dict
+for i in range(len(albums_dict["album"])):
+
+    # Determine if album is a studio album
+    if albums_dict["album"][i]["strAlbum"] in studio_albums:
+
+        # Print album description
+        print(albums_dict["album"][i]["strDescriptionEN"].split("\n")[0])
+
+
 

@@ -86,13 +86,25 @@ def create_song(title, album):
 
     return song
 
-def return_all_songs():
-    """Return a list of all songs."""
-
-    return Album.query.all()
-
 def get_song_by_id(song_id):
     """Get song by song_id."""
 
     return Song.query.get(song_id)
+
+# SNIPPET FUNCTIONS
+
+def create_snippet(text, user):
+    """Create and return a new snippet."""
+
+    snippet = Snippet(text=text, user=user)
+
+    db.session.add(snippet)
+    db.session.commit()
+
+    return snippet
+
+def get_snippet_by_id(snippet_id):
+    """Get snippet by snippet_id."""
+
+    return Snippet.query.get(snippet_id)
 

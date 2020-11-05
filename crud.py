@@ -108,3 +108,20 @@ def get_snippet_by_id(snippet_id):
 
     return Snippet.query.get(snippet_id)
 
+# SNIPPET_ALBUM FUNCTIONS
+
+def create_snippet_album(snippet, album):
+    """Create and return a new snippet_album."""
+
+    snippet_album = Snippet_Album(snippet=snippet, album=album)
+
+    db.session.add(snippet_album)
+    db.session.commit()
+
+    return snippet_album
+
+def get_snippet_album_by_id(snippet_album_id):
+    """Get snippet by snippet_id."""
+
+    return Snippet.query.get(snippet_album_id)
+

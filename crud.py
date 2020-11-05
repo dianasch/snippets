@@ -1,6 +1,6 @@
 """CRUD operations."""
 
-from model import db, User, Movie, Rating, connect_to_db
+from model import db, User, Artist, Album, Song, Snippet, Snippet_Album, connect_to_db
 
 # USER FUNCTIONS
 
@@ -56,8 +56,11 @@ def get_artist_by_id(artist_id):
 def create_album(title, thumbnail_path, details, full_lyrics, artist):
     """Create and return a new album."""
 
-    album = album(title=title, thumbnail_path=thumbnail_path, details=details,
-                    full_lyrics=full_lyrics, artist=artist)
+    album = Album(title=title,
+                thumbnail_path=thumbnail_path,
+                details=details,
+                full_lyrics=full_lyrics,
+                artist=artist)
 
     db.session.add(album)
     db.session.commit()
@@ -125,3 +128,7 @@ def get_snippet_album_by_id(snippet_album_id):
 
     return Snippet.query.get(snippet_album_id)
 
+
+if __name__ == '__main__':
+    from server import app
+    connect_to_db(app)

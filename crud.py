@@ -51,6 +51,11 @@ def get_artist_by_id(artist_id):
 
     return Artist.query.get(artist_id)
 
+def get_artist_by_name(name):
+    """Get artist by name."""
+
+    return Artist.query.filter(Artist.name == name).first()
+
 # ALBUM FUNCTIONS
 
 def create_album(title, thumbnail_path, details, full_lyrics, artist):

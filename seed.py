@@ -30,14 +30,9 @@ albums_dict = json.loads(albums_response.content)
 studio_albums = set(["folklore", "Lover", "reputation", "1989",
                     "Red", "Speak Now", "Fearless", "Taylor Swift"])
 
-# Loop through a range the length of number of albums listed in albums_dict
-for i in range(len(albums_dict["album"])):
 
-    # Determine if album is a studio album
-    if albums_dict["album"][i]["strAlbum"] in studio_albums:
+albums_in_db = []
 
-        # Print album title
-        print(albums_dict["album"][i]["strAlbum"])
 
 
 # Loop through a range the length of number of albums listed in albums_dict
@@ -46,18 +41,39 @@ for i in range(len(albums_dict["album"])):
     # Determine if album is a studio album
     if albums_dict["album"][i]["strAlbum"] in studio_albums:
 
-        # Print album thumbnail path
-        print(albums_dict["album"][i]["strAlbumThumb"])
+
+        title = albums_dict["album"][i]["strAlbum"]
+        thumbnail_path = albums_dict["album"][i]["strAlbumThumb"]
+        details = albums_dict["album"][i]["strDescriptionEN"].split("\n")[0]
+
+        for title in studio_albums:
+
+            file = open(f"data/{title}.txt")
+            full_lyrics = file.read()
+
+        db_album = crud.create_album(title, thumbnail_path, details, full_lyrics, crud.get_artist_by_name("Taylor Swift"))
+        albums_in_db.append(db_album)
 
 
-# Loop through a range the length of number of albums listed in albums_dict
-for i in range(len(albums_dict["album"])):
-
-    # Determine if album is a studio album
-    if albums_dict["album"][i]["strAlbum"] in studio_albums:
-
-        # Print album description
-        print(albums_dict["album"][i]["strDescriptionEN"].split("\n")[0])
 
 
+
+# # Loop through a range the length of number of albums listed in albums_dict
+# for i in range(len(albums_dict["album"])):
+
+#     # Determine if album is a studio album
+#     if albums_dict["album"][i]["strAlbum"] in studio_albums:
+
+        
+#         album_id = albums_dict["album"][i]["idAlbum"]
+
+#         track_url = f"https://theaudiodb.com/api/v1/json/1/track.php?m={album_id}"
+
+#         track_response = requests.get(track_url)
+
+#         track_dict = json.loads(track_response.content)
+
+#         for i in range(len(track_dict["track"])):
+
+#             print(track_dict["track"][i]["strTrack"])
 

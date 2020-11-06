@@ -82,6 +82,11 @@ def get_album_by_id(album_id):
 
     return Album.query.get(album_id)
 
+def get_album_by_title(title):
+    """Get album by title."""
+
+    return Album.query.filter(Album.title == title).first()
+
 # SONG FUNCTIONS
 
 def create_song(title, album):

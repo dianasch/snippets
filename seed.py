@@ -36,44 +36,56 @@ albums_in_db = []
 
 
 # Loop through a range the length of number of albums listed in albums_dict
-for i in range(len(albums_dict["album"])):
+for album in albums_dict["album"]:
 
     # Determine if album is a studio album
-    if albums_dict["album"][i]["strAlbum"] in studio_albums:
+    if album["strAlbum"] in studio_albums:
+
+        # Pull title, thumbnail_path, and details from API
+        title = album["strAlbum"]
+        thumbnail_path = album["strAlbumThumb"]
+        details = album["strDescriptionEN"].split("\n")[0]
+
+        # Pull .txt files of full lyrics for each album from data folder
 
 
-        title = albums_dict["album"][i]["strAlbum"]
-        thumbnail_path = albums_dict["album"][i]["strAlbumThumb"]
-        details = albums_dict["album"][i]["strDescriptionEN"].split("\n")[0]
+        file = open(f"data/{title}.txt")
+        full_lyrics = file.read()
 
-        for title in studio_albums:
+        print(title)
 
-            file = open(f"data/{title}.txt")
-            full_lyrics = file.read()
+        # Add each studio album to albums table db
+        # Link to artist Taylor Swift in db
+        db_album = crud.create_album(title,
+                                    thumbnail_path,
+                                    details,
+                                    full_lyrics,
+                                    crud.get_artist_by_name("Taylor Swift"))
 
-        db_album = crud.create_album(title, thumbnail_path, details, full_lyrics, crud.get_artist_by_name("Taylor Swift"))
+        # Add each studio album to albums_in_db list
         albums_in_db.append(db_album)
 
 
 
+        # Pull API's album id for each studio album
+        album_id = album["idAlbum"]
 
+        # URL from The Audio DB API containing track listings for each album
+        track_url = f"https://theaudiodb.com/api/v1/json/1/track.php?m={album_id}"
 
-# # Loop through a range the length of number of albums listed in albums_dict
-# for i in range(len(albums_dict["album"])):
+        # Response object from URL
+        track_response = requests.get(track_url)
 
-#     # Determine if album is a studio album
-#     if albums_dict["album"][i]["strAlbum"] in studio_albums:
+        # Convert response object to dictionary
+        track_dict = json.loads(track_response.content)
 
-        
-#         album_id = albums_dict["album"][i]["idAlbum"]
+        # Loop through a range the length of number of albums
+        # listed in track_dict
+        for track in track_dict["track"]:
 
-#         track_url = f"https://theaudiodb.com/api/v1/json/1/track.php?m={album_id}"
-
-#         track_response = requests.get(track_url)
-
-#         track_dict = json.loads(track_response.content)
-
-#         for i in range(len(track_dict["track"])):
-
-#             print(track_dict["track"][i]["strTrack"])
+            # Add each song to songs table in db
+            # Pull album title from API to link to album in db
+            crud.create_song(track["strTrack"],
+                            crud.get_album_by_title(
+                            track["strAlbum"]))
 

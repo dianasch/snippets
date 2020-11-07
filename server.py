@@ -20,10 +20,24 @@ def get_homepage():
     return render_template('homepage.html')
 
 @app.route('/albums')
+def show_all_albums():
+    """View all albums."""
+
+    albums = crud.return_all_albums()
+
+    return render_template('all_albums.html', albums=albums)
+
+@app.route('/albums/<album_id>')
+def album_details(album_id):
+    """Show details on specific albums."""
+
+    album = crud.get_album_by_id(album_id)
+
+    return render_template('album_details.html', album=album)
 
 @app.route('/users', methods = ['POST'] )
 def register_user():
-    """Get inputs from form"""
+    """Get inputs from create account form."""
 
     email = request.form.get('email')
     password = request.form.get('password')
@@ -55,4 +69,5 @@ def log_in():
     return redirect('/')
 
 if __name__ == "__main__":
+    connect_to_db(app)
     app.run(debug=True, host="0.0.0.0")

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Taylor Swift Albums{% endblock %}
+
+{% block body %}
+    <h1>All Movies</h1>
+
+    {% for album in albums %}
+    <ul>
+        <li><a href = "/albums/{{album.album_id}}">{{album.title}}</a></li>
+    </ul>
+
+    {% endfor %}
+{% endblock %}  

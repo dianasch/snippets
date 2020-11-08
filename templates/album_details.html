@@ -11,12 +11,17 @@
     {{ album.details }}
 </p>
 
-{% for song in {{album.songs}} %}
+<p>Track Listing</p>
+{% for song in songs %}
 
 <ul>
-    <li>{{ album.songs.title }}</li>
+    <li>{{ song.title }}</li>
 </ul>
 {% endfor %}
+
+<form action="/snippet">
+    <button type="submit">Create snippet</button>
+</form>
 
 
 {% endblock %}

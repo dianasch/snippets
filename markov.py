@@ -1,202 +1,93 @@
-# """A Markov chain generator that can tweet random messages."""
+"""A Markov chain generator that can create random song snippets."""
 
-# import sys
-# from random import choice
-# import os
+from random import choice
 
-
-
-# def open_and_read_file(filenames):
-#     """Take list of files. Open them, read them, and return one long string."""
-
-#     body = ''
-#     for filename in filenames:
-#         text_file = open(filename)
-#         body = body + text_file.read()
-#         text_file.close()
-
-#     return body
-
-
-# def make_chains(text_string):
-#     """Take input text as string; return dictionary of Markov chains."""
-
-#     chains = {}
-
-#     words = text_string.split()
-#     for i in range(len(words) - 2):
-#         key = (words[i], words[i + 1])
-#         value = words[i + 2]
-
-#         if key not in chains:
-#             chains[key] = []
-
-#         chains[key].append(value)
-
-#     return chains
-
-
-# def make_text(chains):
-#     """Take dictionary of Markov chains; return random text."""
-
-#     keys = list(chains.keys())
-#     key = choice(keys)
-
-#     words = [key[0], key[1]]
-#     while key in chains:
-#         # Keep looping until we have a key that isn't in the chains
-#         # (which would mean it was the end of our original text).
-
-#         # Note that for long texts (like a full book), this might mean
-#         # it would run for a very long time.
-
-#         word = choice(chains[key])
-#         words.append(word)
-#         key = (key[1], word)
-
-#     return ' '.join(words)
-
-
-# # Get the filenames from the user through a command line prompt, ex:
-# # python markov.py green-eggs.txt shakespeare.txt
-# filenames = sys.argv[1:]
-
-# # Open the files and turn them into one long string
-# text = open_and_read_file(filenames)
-
-# # Get a Markov chain
-# chains = make_chains(text)
-
-# print(chains)
-
-import random
 import sys
 
-file_name = sys.argv[1]
+# CODE BELOW FOR TESTING PURPOSES
+# file_name = sys.argv[1]
 
-def open_and_read_file(file_path):
-    """Take file path as string; return text as string.
-    Takes a string that is a file path, opens the file, and turns
-    the file's contents as one string of text.
-    """
+# def open_and_read_file(file_name):
+#     """Take file path as string; return text as string.
+#     Takes a string that is a file path, opens the file, and turns
+#     the file's contents as one string of text.
+#     """
 
-    # your code goes here
-    file = open(file_name)
-    text = file.read()
-    return text
+#     # your code goes here
+#     file = open(file_name)
+#     text = file.read()
+#     return text
 
+def make_chains(text):
+    """Take input text as string; return dictionary of Markov chains."""
 
-
-def make_chains(file_name):
-    """Take input text as string; return dictionary of Markov chains.
-    A chain will be a key that consists of a tuple of (word1, word2)
-    and the value would be a list of the word(s) that follow those two
-    words in the input text.
-    For example:
-        >>> chains = make_chains('hi there mary hi there juanita')
-    Each bigram (except the last) will be a key in chains:
-        >>> sorted(chains.keys())
-        [('hi', 'there'), ('mary', 'hi'), ('there', 'mary')]
-    Each item in chains is a list of all possible following words:
-        >>> chains[('hi', 'there')]
-        ['mary', 'juanita']
-        >>> chains[('there','juanita')]
-        [None]
-        
-        {Would, you} : [could, could, could, like, like]
-    """
-    full_text = open_and_read_file(file_name)
-    full_text_lst = full_text.replace('(', ' ').replace(')', ' ').replace('"', ' ').rstrip().split()
+    # Strip trailing whitespace and remove `(, )`` chars from text
+    # Set variable `words` to list of split text
     
+    words = text.replace('(', ' ').replace(')', ' ').replace('"', ' ').strip().split()
+    
+    # Set variable `chains` to empty dictionary
     chains = {}
 
-    for i in range(len(full_text_lst) - 2):
-        # the next 3 lines will create a empty list and then appends the word at i(would) & i+1(you)
-        key_list = []
-        key_list.append(full_text_lst[i])
-        key_list.append(full_text_lst[i + 1])
+    # Loop through a range the length of words - 2
+    for i in range(len(words) - 2):
 
-        key_tuple = tuple(key_list) #takes the key_list and convers it to a tuple {would, you}
+        # Set variable `key` to a tuple of the words at index i and i + 1
+        key = (words[i], words[i + 1])
 
+        # Set variable `value` to the word at index i + 2,
+        # the next word after the key
+        value = words[i + 2]
         
-        if key_tuple in chains.keys():
-            chains.get(key_tuple).append(full_text_lst[i + 2])
-        else:
-            chains[key_tuple] = [full_text_lst[i + 2]]
-            
+        # If key not in chains, set key value to empty list
+        if key not in chains.keys():
+            chains[key] = []
 
+        # If key is in chains, append value to list stored at key
+        chains[key].append(value)
+            
     return chains
 
 
 def make_text(chains):
-    """Return text from chains."""
+    """Return random text from chains."""
 
-    #Set variable words to empty list to store Markov chain of text
-    words = []
-
-    #Set variable chains to dict called from make_chains function
+    #Set variable `chains` to dict called from make_chains function
     chains = make_chains(input_text)
 
-    #Set variable keys to keys in dict
+    #Set variable `keys` to keys in dict
     keys = chains.keys()
 
-    #Set variable first_key to a random tuple from keys
-    first_key = random.choice(list(keys))
+    #Set variable `key` to a random tuple from keys
+    key = choice(list(keys))
 
-    #First word of next tuple is the second item in the first_key tuple
-    first_word = first_key[1]
+    # Set variable `words` to list with key tuple
+    words = [key[0].capitalize(), key[1]]
 
-    #First next word is a random word from the list of values stored at
-    #first_key in dict
-    first_next = random.choice(list(chains[first_key]))
-
-    #Add first item in first_key to words capitalized
-    words.append(first_key[0].capitalize())
-
-    #Add second item in first_key to words
-    words.append(first_key[1])
-
-    #Add first next word to words
-    words.append(first_next)
-
-    #Create a condition that is always true
+    # Limit random text length to 60
     while len(words) < 60:
 
-        #List of the current key
-        #Item at index 0 is the second to last word in list
-        #Item at index 1 is the last word in list
-        current_key_list = []
-        current_key_list.append(words[-2])
-        current_key_list.append(words[-1])
+        # Set variable `word` to a randomly chosen word from
+        # the list stored at current key
+        word = choice(chains[key])
 
-        #Create a tuple from the list of current key
-        current_key = tuple(current_key_list)
+        # Add that word to the list of Markov text
+        words.append(word)
 
-        #If current_key not in keys, break the loop
-        if current_key not in keys:
-            break
-
-        #If current_key in keys, continue adding to list of words
-        else:
-
-            #Choose a random word from the list of words stored
-            #as the value for the current key
-            current_next = random.choice(list(chains[current_key]))
-
-            #Add new random word to list of words
-            words.append(current_next)
+        # Set new key to a tuple of the second to last and last words in list
+        key = (words[-2], words[-1])
 
     #Return joined list of words
     return " ".join(words)
 
-
+# CODE BELOW FOR TESTING
 # # Open the file and turn it into one long string
-input_text = open_and_read_file(file_name)
+# input_text = open_and_read_file(file_name)
 
-# Get a Markov chain
-chains = make_chains(input_text)
+# # Get a Markov chain
+# chains = make_chains(input_text)
 
-# Produce random text
-random_text = make_text(chains)
+# # Produce random text
+# random_text = make_text(chains)
 
-print(random_text)
+# print(random_text)

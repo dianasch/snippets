@@ -104,6 +104,11 @@ def get_song_by_id(song_id):
 
     return Song.query.get(song_id)
 
+def get_songs_by_album(album_id):
+    """Get all songs on an album."""
+
+    return Song.query.filter(Song.album_id == album_id).all()
+
 # SNIPPET FUNCTIONS
 
 def create_snippet(text, user):

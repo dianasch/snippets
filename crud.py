@@ -82,10 +82,19 @@ def get_album_by_id(album_id):
 
     return Album.query.get(album_id)
 
-def get_album_by_title(title):
-    """Get album by title."""
+def get_album_title_by_id(album_id):
+    """Get album title by album_id."""
 
-    return Album.query.filter(Album.title == title).first()
+    album = get_album_by_id(album_id)
+
+    return album.title
+
+def get_album_lyrics_by_id(album_id):
+    """Get album lyrics by album_id."""
+
+    album = get_album_by_id(album_id)
+
+    return album.full_lyrics
 
 # SONG FUNCTIONS
 

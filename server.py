@@ -8,6 +8,7 @@ import os
 
 from model import connect_to_db
 import crud
+import markov
 
 app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY")
@@ -28,12 +29,26 @@ def show_all_albums():
     return render_template('all_albums.html', albums=albums)
 
 @app.route('/albums/<album_id>')
-def album_details(album_id):
+def show_album_details(album_id):
     """Show details on specific albums."""
 
     album = crud.get_album_by_id(album_id)
+    songs = crud.get_songs_by_album(album_id)
 
-    return render_template('album_details.html', album=album)
+    return render_template('album_details.html', album=album,
+                                                songs=songs)
+
+@app.route('/albums/<album_id>/snippet')
+def create_snippet(album_id):
+
+    title = crud.get_album_title_by_id(album_id)
+    lyrics = crud.get_album_lyrics_by_id(album_id)
+
+    chains = markov.make_chains(lyrics)
+    snippet = markov.make_text(chains)
+
+    return render_template('snippet.html', title=title,
+                                        snippet=snippet)
 
 @app.route('/users', methods = ['POST'] )
 def register_user():

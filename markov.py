@@ -24,7 +24,7 @@ def make_chains(text):
     # Strip trailing whitespace and remove `(, )`` chars from text
     # Set variable `words` to list of split text
     
-    words = text.replace('(', ' ').replace(')', ' ').replace('"', ' ').strip().split()
+    words = text.replace('(', ' ').replace(')', ' ').replace('"', ' ').replace('.', ' ').strip().split()
     
     # Set variable `chains` to empty dictionary
     chains = {}
@@ -51,9 +51,6 @@ def make_chains(text):
 
 def make_text(chains):
     """Return random text from chains."""
-
-    #Set variable `chains` to dict called from make_chains function
-    chains = make_chains(input_text)
 
     #Set variable `keys` to keys in dict
     keys = chains.keys()

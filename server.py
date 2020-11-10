@@ -59,7 +59,6 @@ def save_snippet(album_id):
 
     album = crud.get_album_by_id(album_id)
     snippet = session['snippet']
-    print(snippet)
 
 
     if session['user']:

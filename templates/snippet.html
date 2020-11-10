@@ -11,7 +11,7 @@
 
 {% if 'user' in session %}
 
-<form action="/albums/{{album.album_id}}/snippet/save" method="POST" id="save-snippet">
+<form action="/albums/{{album.album_id}}/snippet/save" id="save-snippet">
     <button type="submit">Save snippet</button>
 </form>
 {% endif %}

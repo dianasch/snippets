@@ -53,7 +53,7 @@ def create_snippet(album_id):
 
     return render_template('snippet.html', title=title, snippet=snippet, album=album)
 
-@app.route('/albums/<album_id>/snippet/save', methods = ['POST'])
+@app.route('/albums/<album_id>/snippet/save')
 def save_snippet(album_id):
     """Save song snippet to database."""
 
@@ -62,11 +62,11 @@ def save_snippet(album_id):
     print(snippet)
 
 
-    # if session['user']:
-    #     db_snippet = crud.create_snippet(snippet, session['user'])
-    #     snippet_album = crud.create_snippet_album(db_snippet, album_id)
-    #     flash('Snippet saved!')
-    # flash('Log in to save your snippet!')
+    if session['user']:
+        db_snippet = crud.create_snippet(snippet, crud.get_user_by_id(session['user']))
+        snippet_album = crud.create_snippet_album(db_snippet, album)
+        flash('Snippet saved!')
+    flash('Log in to save your snippet!')
 
     return redirect('/')
 

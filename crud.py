@@ -135,6 +135,11 @@ def get_snippet_by_id(snippet_id):
 
     return Snippet.query.get(snippet_id)
 
+def get_snippets_by_user(user_id):
+    """Get snippets saved by user."""
+
+    return Snippet.query.filter(Snippet.user_id == user_id).all()
+
 # SNIPPET_ALBUM FUNCTIONS
 
 def create_snippet_album(snippet, album):

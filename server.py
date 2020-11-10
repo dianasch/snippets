@@ -40,15 +40,53 @@ def show_album_details(album_id):
 
 @app.route('/albums/<album_id>/snippet')
 def create_snippet(album_id):
+    """Create and display Markov song snippet from album lyrics."""
+
+    album = crud.get_album_by_id(album_id)
 
     title = crud.get_album_title_by_id(album_id)
     lyrics = crud.get_album_lyrics_by_id(album_id)
 
     chains = markov.make_chains(lyrics)
     snippet = markov.make_text(chains)
+    session['snippet'] = snippet
 
-    return render_template('snippet.html', title=title,
-                                        snippet=snippet)
+    return render_template('snippet.html', title=title, snippet=snippet, album=album)
+
+@app.route('/albums/<album_id>/snippet/save', methods = ['POST'])
+def save_snippet(album_id):
+    """Save song snippet to database."""
+
+    album = crud.get_album_by_id(album_id)
+    snippet = session['snippet']
+    print(snippet)
+
+
+    # if session['user']:
+    #     db_snippet = crud.create_snippet(snippet, session['user'])
+    #     snippet_album = crud.create_snippet_album(db_snippet, album_id)
+    #     flash('Snippet saved!')
+    # flash('Log in to save your snippet!')
+
+    return redirect('/')
+
+@app.route('/all-users')
+def show_all_users():
+    """View all users."""
+
+    users = crud.return_all_users()
+
+    return render_template('all_users.html', users=users)
+
+@app.route('/all-users/<user_id>')
+def user_details(user_id):
+    """Show user detail page with favorite song snippets."""
+
+    user = crud.get_user_by_id(user_id)
+    snippets = crud.get_snippets_by_user(user_id)
+
+    return render_template('user_details.html', user=user,
+                                                snippets=snippets)
 
 @app.route('/users', methods = ['POST'] )
 def register_user():
@@ -57,18 +95,18 @@ def register_user():
     email = request.form.get('email')
     password = request.form.get('password')
     user = crud.get_user_by_email(email)
-
+    print(user)
     if user == None:
         crud.create_user(email, password)
         flash('Account created! You can now log in.')
     else:    
-        flash('Email already exists. Try again.')
+        flash('Email already exists.')
 
     return redirect('/')
 
 @app.route('/login', methods = ['POST'])
 def log_in():
-    """Gets input from log-in and checks to see if emails and passwords
+    """Gets input from log-in and checks to see if email and password
     match."""
 
     email = request.form.get('email')
@@ -78,6 +116,7 @@ def log_in():
     if email == user.email and password == user.password:
         session['user'] = user.user_id
         flash('Logged in!')
+
     else:
         flash('Email and password do not match.')
     

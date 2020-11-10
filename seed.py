@@ -47,12 +47,8 @@ for album in albums_dict["album"]:
         details = album["strDescriptionEN"].split("\n")[0]
 
         # Pull .txt files of full lyrics for each album from data folder
-
-
         file = open(f"data/{title}.txt")
         full_lyrics = file.read()
-
-        print(title)
 
         # Add each studio album to albums table db
         # Link to artist Taylor Swift in db

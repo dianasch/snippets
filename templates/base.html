@@ -1,6 +1,11 @@
 <!doctype html>
 <html>
     <head>
+        <script
+        src="http://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/static/css/styles.css"/>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title>
@@ -9,13 +14,15 @@
 
     {% block head %}{% endblock %}
     </head>
+
     <body>
-    {% block body %}
     {% for msg in get_flashed_messages() %}
     <p class="flash-msg">
         {{ msg }}
     </p>
     {% endfor %}
+    {% block body %}
+
     {% endblock %}
 
     {% block after_body %}{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ user.email }} - Profile{% endblock %}
+
+{% block body %}
+<h1>Favorite Snippets</h1>
+
+{% for snippet in snippets %}
+
+<ul>
+    <li>{{ snippet }}</li>
+</ul>
+{% endfor %}
+
+{% endblock %}

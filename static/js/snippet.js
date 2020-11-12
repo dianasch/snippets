@@ -2,13 +2,14 @@
 
 
 
-// $('#create-snippet').on('submit', (evt) => {
+
+// $('#create-snippet').on('click', (evt) => {
 //     evt.preventDefault();
 
-//     const snippet = sessionStorage.getItem('snippet')
+//     const snippet = sessionStorage.getItem('snippet');
 
-//     ('#display-snippet').html(snippet)
-// };
+//     ('#display-snippet').html(snippet);
+// });
 
 // $('#save-snippet').on('submit', (evt) => {
 //     evt.preventDefault();

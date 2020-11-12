@@ -8,6 +8,13 @@
 
     <ul>
         <li><a href="/albums">View all albums</a></li>
+    
+
+    {% if 'user' in session %}
+
+        <li><a href="/all-users/{{session['user']}}" id="view-snippets">View saved snippets</a></li>
+
+    {% endif %}
     </ul>
 
     <h2>Create an Account</h2>

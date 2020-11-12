@@ -18,6 +18,7 @@ app.jinja_env.undefined = StrictUndefined
 def get_homepage():
     """View homepage."""
 
+
     return render_template('homepage.html')
 
 @app.route('/albums')
@@ -65,7 +66,8 @@ def save_snippet(album_id):
         db_snippet = crud.create_snippet(snippet, crud.get_user_by_id(session['user']))
         snippet_album = crud.create_snippet_album(db_snippet, album)
         flash('Snippet saved!')
-    flash('Log in to save your snippet!')
+    else:
+        flash('Log in to save your snippet!')
 
     return redirect('/')
 

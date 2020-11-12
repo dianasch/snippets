@@ -155,9 +155,34 @@ def create_snippet_album(snippet, album):
     return snippet_album
 
 def get_snippet_album_by_id(snippet_album_id):
-    """Get snippet by snippet_id."""
+    """Get snippet album by snippet_album_id."""
 
-    return Snippet.query.get(snippet_album_id)
+    return Snippet_Album.query.get(snippet_album_id)
+
+
+def get_album_for_snippet():
+    """Get album_id for each snippet."""
+
+    dictionary = {}
+
+    for album in Album.query.all():
+
+        if album.snippets_albums:
+
+            dictionary[album.title] = album.snippets_albums
+
+    for snippets_albums in dictionary:
+
+        for snippet_album in dictionary[snippets_albums]:
+
+            snippet_album = snippet_album.snippet_id
+            print(snippet_album)
+    
+    return dictionary
+
+
+
+
 
 
 if __name__ == '__main__':

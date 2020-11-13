@@ -142,6 +142,13 @@ def get_snippets_by_user(user_id):
 
     return text.filter(Snippet.user_id == user_id).all()
 
+def get_snippet_text(snippet_id):
+    """Get snippet text by snippet_id."""
+
+    text = db.session.query(Snippet.text)
+
+    return text.filter(Snippet.snippet_id == snippet_id).one()
+
 # SNIPPET_ALBUM FUNCTIONS
 
 def create_snippet_album(snippet, album):
@@ -160,28 +167,58 @@ def get_snippet_album_by_id(snippet_album_id):
     return Snippet_Album.query.get(snippet_album_id)
 
 
-def get_album_for_snippet():
-    """Get album_id for each snippet."""
+def get_user_album_snippet():
+    """Get a dictionary of users with snippets saved by each user sorted by 
+    album_id."""
 
-    dictionary = {}
+    # Join snippets_albums table with snippets table and albums table
+    snippet_album_join = db.session.query(Snippet_Album).\
+        options(db.joinedload('album')).\
+        options(db.joinedload('snippet')).all()
 
-    for album in Album.query.all():
+    # Set variable `user_dict` to empty dictionary
+    user_dict = {}
 
-        if album.snippets_albums:
+    # Loop through each Snippet_Album object in joined table
+    for snippet_album in snippet_album_join:
 
-            dictionary[album.title] = album.snippets_albums
+        # Set variable `user_id` for user_id of Snippet_Album object
+        user_id = snippet_album.snippet.user_id
 
-    for snippets_albums in dictionary:
+        # Set variable `album_id` for album_id of Snippet_Album object
+        album_id = snippet_album.album_id
 
-        for snippet_album in dictionary[snippets_albums]:
+        # Set variable `snippet_id` for snippet_id Snippet_Album object
+        snippet_id = snippet_album.snippet_id
 
-            snippet_album = snippet_album.snippet_id
-            print(snippet_album)
-    
-    return dictionary
+        # Determine if user_id is not already in dictionary
+        if user_id not in user_dict:
 
+            # If not, set value of user_id in user_dict to a new dictionary w/
+            # key as current album_id
+            # value as a list containing current snippet_id
 
+            user_dict[user_id] = {album_id: [snippet_id]}
 
+        # If user_id is already in dictionary
+        else:
+
+            # Determine if dictionary stored at user_id contains
+            # current album_id
+            if album_id in user_dict[user_id]:
+                
+                # If so, append current snippet_id to list stored at album_id key
+                user_dict[user_id][album_id].append(snippet_id)
+
+            # Otherwise, if current album_id is not in dictionary stored at
+            # user_id
+            else:
+
+                # Create a new key for current album_id with value stored as
+                # a list containing current snippet_id
+                user_dict[user_id][album_id] = [snippet_id]
+
+    return user_dict
 
 
 

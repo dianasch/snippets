@@ -1,22 +1,25 @@
 """A Markov chain generator that can create random song snippets."""
 
 from random import choice
+from collections import Counter
 
 import sys
+import re
+
 
 # CODE BELOW FOR TESTING PURPOSES
 # file_name = sys.argv[1]
 
-# def open_and_read_file(file_name):
-#     """Take file path as string; return text as string.
-#     Takes a string that is a file path, opens the file, and turns
-#     the file's contents as one string of text.
-#     """
+def open_and_read_file(file_name):
+    """Take file path as string; return text as string.
+    Takes a string that is a file path, opens the file, and turns
+    the file's contents as one string of text.
+    """
 
-#     # your code goes here
-#     file = open(file_name)
-#     text = file.read()
-#     return text
+    # your code goes here
+    file = open(file_name)
+    text = file.read()
+    return text
 
 def make_chains(text):
     """Take input text as string; return dictionary of Markov chains."""
@@ -88,3 +91,43 @@ def make_text(chains):
 # random_text = make_text(chains)
 
 # print(random_text)
+
+
+def count_words(text):
+
+    clean_text = re.sub("^\w\d'\s]+",' ', text)
+    words = clean_text.replace('?', ' ').lower().strip().split()
+
+    count = {}
+
+    for word in words:
+
+        if word in count:
+
+            count[word] = count.get(word) + 1
+        
+        else:
+
+            count[word] = 1
+    
+    return count
+
+f = open_and_read_file('folklore.txt')
+
+def most_common(text):
+
+    clean_text = re.sub("^\w\d'\s]+",' ', text)
+    words = clean_text.lower().replace('?', ' ').replace('the', ' ').replace('and', ' ').strip().split()
+
+
+    # set(['the', 'and','to', 'a', 'in', 'it', 'of', 'on', 'for'])
+
+    return Counter(words).most_common(20)
+
+
+def least_common(text):
+
+    clean_text = re.sub("^\w\d'\s]+",' ', text)
+    words = clean_text.replace('?', ' ').lower().strip().split()
+
+    return Counter(words).most_common()[-19:]

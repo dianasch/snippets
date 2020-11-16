@@ -27,7 +27,7 @@ def make_chains(text):
     # Strip trailing whitespace and remove `(, )`` chars from text
     # Set variable `words` to list of split text
     
-    words = text.replace('(', ' ').replace(')', ' ').replace('"', ' ').replace('.', ' ').strip().split()
+    words = text.replace('(', ' ').replace(')', ' ').replace('"', ' ').replace('.', ' ').replace('[', ' ').replace(']', ' ').strip().split()
     
     # Set variable `chains` to empty dictionary
     chains = {}

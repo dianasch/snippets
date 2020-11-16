@@ -24,25 +24,28 @@
 {% endif %}
 
 {% if album_id | int > 8 %}
-<form>
+<form action='/albums/{{album.album_id}}/snippet' method="POST">
     <label for="taylor-swift-album">Choose a Taylor Swift Album for your mash-up:</label><br>
     <select name="taylor-swift-album" required>
-        <option value="1">Taylor Swift</option>
-        <option value="2">Fearless</option>
-        <option value="3">Red</option>
-        <option value="4">Speak Now</option>
-        <option value="5">1989</option>
-        <option value="6">reputation</option>
-        <option value="7">Lover</option>
-        <option value="8">folklore</option>
-        <option value="9">Choose a random Taylor Swift album</option>
+        <option disabled selected value> -- Select an option -- </option>
+        <option value="Taylor Swift">Taylor Swift</option>
+        <option value="Fearless">Fearless</option>
+        <option value="Red">Red</option>
+        <option value="Speak Now">Speak Now</option>
+        <option value="1989">1989</option>
+        <option value="reputation">reputation</option>
+        <option value="Lover">Lover</option>
+        <option value="folklore">folklore</option>
+        <option value="Random">Choose a random Taylor Swift album</option>
     </select><br>
     <button type="submit" id="create-snippet">Create snippet</button>
 </form>
 
 {% else %}
 
+<form action='/albums/{{album.album_id}}/snippet'>
 <button type="submit" id="create-snippet">Create snippet</button>
+</form>
 
 {% endif %}
 

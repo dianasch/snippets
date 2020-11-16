@@ -3,6 +3,7 @@
 from flask import (Flask, render_template, request, flash, session,
                     redirect, jsonify)
 from jinja2 import StrictUndefined
+import random
 import requests
 import os
 
@@ -40,15 +41,29 @@ def show_album_details(album_id):
                                                 songs=songs,
                                                 album_id=album_id)
 
-@app.route('/albums/<album_id>/snippet')
+@app.route('/albums/<album_id>/snippet', methods = ['GET', 'POST'])
 def create_snippet(album_id):
     """Create and display Markov song snippet from album lyrics."""
 
     album = crud.get_album_by_id(album_id)
-
     title = crud.get_album_title_by_id(album_id)
-    lyrics = crud.get_album_lyrics_by_id(album_id)
+    choice = request.values.get('taylor-swift-album')
 
+    if int(album_id) <= 8:
+        
+        lyrics = crud.get_album_lyrics_by_id(album_id)
+    
+    elif int(album_id) > 8:
+
+        if choice == "Random":
+
+            lyrics = crud.get_album_lyrics_by_id(album_id) + crud.get_album_lyrics_by_id(random.randint(1, 8))
+
+        else:
+
+            lyrics = crud.get_album_lyrics_by_id(album_id) + crud.get_album_lyrics_by_title(str(choice))
+
+            
     chains = markov.make_chains(lyrics)
     snippet = markov.make_text(chains)
     session['snippet'] = snippet
@@ -99,7 +114,7 @@ def add_user_upload_to_db():
 
     album_id = crud.get_album_by_title(title)
 
-    return redirect('/albums/<album_id>')
+    return redirect('/albums/album_id')
 
 
 # @app.route('/bubble')

@@ -42,7 +42,8 @@ class User(db.Model):
     password = db.Column(db.String(20),
                         nullable = False)
 
-    # snippets = a list of Snippet objects
+    # snippets = a list of Snippet objects saved by user
+    # albums = a list of Album objects uploaded by user
 
     # Method to identify each User instance
     def __repr__(self):

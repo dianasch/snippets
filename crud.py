@@ -102,6 +102,13 @@ def get_album_lyrics_by_id(album_id):
 
     return album.full_lyrics
 
+def get_album_lyrics_by_title(title):
+    """Get album lyrics by album_id."""
+
+    album = get_album_by_title(title)
+
+    return album.full_lyrics
+
 # SONG FUNCTIONS
 
 def create_song(title, album):

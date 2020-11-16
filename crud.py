@@ -185,38 +185,42 @@ def get_user_album_snippet():
         # Set variable `user_id` for user_id of Snippet_Album object
         user_id = snippet_album.snippet.user_id
 
-        # Set variable `album_id` for album_id of Snippet_Album object
-        album_id = snippet_album.album_id
+        # Set variable `album_title` to album title for album_id of 
+        # Snippet_Album object
+        album_title = get_album_title_by_id(snippet_album.album_id)
 
-        # Set variable `snippet_id` for snippet_id Snippet_Album object
-        snippet_id = snippet_album.snippet_id
+        # Set variable `snippet_text` to snippet text for snippet_id
+        # Snippet_Album object
+        # Cast as string and slice extra parens and quotes off of text
+        snippet_text = str(get_snippet_text(snippet_album.snippet_id))[2:-3]
 
         # Determine if user_id is not already in dictionary
         if user_id not in user_dict:
 
             # If not, set value of user_id in user_dict to a new dictionary w/
-            # key as current album_id
-            # value as a list containing current snippet_id
+            # key as current album_title
+            # value as a list containing current snippet_text
 
-            user_dict[user_id] = {album_id: [snippet_id]}
+            user_dict[user_id] = {album_title: [snippet_text]}
 
         # If user_id is already in dictionary
         else:
 
             # Determine if dictionary stored at user_id contains
-            # current album_id
-            if album_id in user_dict[user_id]:
+            # current album_title
+            if album_title in user_dict[user_id]:
                 
-                # If so, append current snippet_id to list stored at album_id key
-                user_dict[user_id][album_id].append(snippet_id)
+                # If so, append current snippet_text to list stored at
+                # album_title key
+                user_dict[user_id][album_title].append(snippet_text)
 
-            # Otherwise, if current album_id is not in dictionary stored at
+            # Otherwise, if current album_title is not in dictionary stored at
             # user_id
             else:
 
-                # Create a new key for current album_id with value stored as
-                # a list containing current snippet_id
-                user_dict[user_id][album_id] = [snippet_id]
+                # Create a new key for current album_title with value stored
+                # as a list containing current snippet_text
+                user_dict[user_id][album_title] = [snippet_text]
 
     return user_dict
 

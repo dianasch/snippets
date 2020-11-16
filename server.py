@@ -71,6 +71,22 @@ def save_snippet(album_id):
 
     return redirect('/')
 
+@app.route('/user-form')
+def show_user_upload_form():
+    """Display user form to upload new album."""
+
+    return render_template('user_form.html')
+
+# @app.route('/bubble')
+# def create_bubble():
+
+#     return render_template('bubble.html')
+
+# @app.route('/bar')
+# def create_bar():
+
+#     return render_template('bar.html')
+
 @app.route('/all-users')
 def show_all_users():
     """View all users."""
@@ -84,7 +100,9 @@ def user_details(user_id):
     """Show user detail page with favorite song snippets."""
 
     user = crud.get_user_by_id(user_id)
-    snippets = crud.get_snippets_by_user(user_id)
+    user_dict = crud.get_user_album_snippet()
+
+    snippets = user_dict[int(user_id)]
 
     return render_template('user_details.html', user=user,
                                                 snippets=snippets)

@@ -113,21 +113,29 @@ def count_words(text):
     return count
 
 f = open_and_read_file('folklore.txt')
+f2 = open_and_read_file('1989.txt')
+f3 = open_and_read_file('Lover.txt')
+f4 = open_and_read_file('Fearless.txt')
+f5 = open_and_read_file('reputation.txt')
+f6 = open_and_read_file('Speak Now.txt')
+f7 = open_and_read_file('Taylor Swift.txt')
+f8 = open_and_read_file('Red.txt')
 
 def most_common(text):
 
-    clean_text = re.sub("^\w\d'\s]+",' ', text)
-    words = clean_text.lower().replace('?', ' ').replace('the', ' ').replace('and', ' ').strip().split()
+    remove = text.lower().replace('?', ' ').replace('(', ' ').replace(')', ' ').replace(',', ' ')
+    clean_text = re.sub("^\w\d'\s]+",' ', remove)
+    words = clean_text.strip().split()
 
+    # set(['the', 'and','to', 'a', 'in', 'of', 'on'])
 
-    # set(['the', 'and','to', 'a', 'in', 'it', 'of', 'on', 'for'])
-
-    return Counter(words).most_common(20)
+    return Counter(words).most_common(27)
 
 
 def least_common(text):
 
-    clean_text = re.sub("^\w\d'\s]+",' ', text)
-    words = clean_text.replace('?', ' ').lower().strip().split()
+    remove = text.lower().replace('?', ' ').replace('(', ' ').replace(')', ' ').replace(',', ' ')
+    clean_text = re.sub("^\w\d'\s]+",' ', remove)
+    words = clean_text.strip().split()
 
     return Counter(words).most_common()[-19:]

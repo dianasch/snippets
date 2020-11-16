@@ -3,12 +3,18 @@
 {% block title %}Taylor Swift Albums{% endblock %}
 
 {% block body %}
-    <h1>All Taylor Swift Albums</h1>
+    <h1>Choose a Taylor Swift Album</h1>
 
+    <div class="link-all-albums">
     {% for album in albums %}
-    <ul>
-        <li><a href = "/albums/{{album.album_id}}">{{album.title}}</a></li>
-    </ul>
+
+        <a href = "/albums/{{album.album_id}}"><img src={{album.thumbnail_path}}></a>
 
     {% endfor %}
+    </div>
+
+    <button type="button" id="user-form">Upload your own album</button>
+
+    <div id="user-form"></div>
+
 {% endblock %}  

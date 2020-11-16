@@ -1,13 +1,16 @@
 "use strict";
 // alert('This is my js code')
 
+const currentPage = window.location.href
+const album_id = currentPage[(currentPage.length) - 1]
+
 $(window).on('load', () => {
     $('#create-snippet').on('click', (evt) => {
         evt.preventDefault();
 
         $.ajax({
 
-            url: "/albums/1/snippet",
+            url: `/albums/${album_id}/snippet`,
 
             type: "GET",
 

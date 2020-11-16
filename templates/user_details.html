@@ -5,10 +5,17 @@
 {% block body %}
 <h1>Favorite Snippets</h1>
 
-{% for snippet in snippets %}
+{% for keys, values in snippets.items() %}
 
 <ul>
-    <li>{{ snippet }}</li>
+    <li>{{ keys }}</li>
+    <ul>
+    {% for value in values %}
+    <li>{{ value }}</li>
+    {% endfor %}
+    </ul>
+
+
 </ul>
 {% endfor %}
 

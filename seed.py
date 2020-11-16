@@ -82,6 +82,5 @@ for album in albums_dict["album"]:
             # Add each song to songs table in db
             # Pull album title from API to link to album in db
             crud.create_song(track["strTrack"],
-                            crud.get_album_by_title(
-                            track["strAlbum"]))
+                            crud.get_album_by_title(track["strAlbum"]))
 

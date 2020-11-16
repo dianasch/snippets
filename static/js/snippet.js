@@ -5,7 +5,7 @@ const currentPage = window.location.href
 const album_id = currentPage[(currentPage.length) - 1]
 
 $(window).on('load', () => {
-    $('#create-snippet').on('click', (evt) => {
+    $('#create-snippet').on('submit', (evt) => {
         evt.preventDefault();
 
         $.ajax({

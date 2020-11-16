@@ -58,14 +58,15 @@ def get_artist_by_name(name):
 
 # ALBUM FUNCTIONS
 
-def create_album(title, thumbnail_path, details, full_lyrics, artist):
+def create_album(title, thumbnail_path, details, full_lyrics, artist, user_id = None):
     """Create and return a new album."""
 
     album = Album(title=title,
                 thumbnail_path=thumbnail_path,
                 details=details,
                 full_lyrics=full_lyrics,
-                artist=artist)
+                artist=artist,
+                user_id=user_id)
 
     db.session.add(album)
     db.session.commit()
@@ -81,6 +82,11 @@ def get_album_by_id(album_id):
     """Get album by album_id."""
 
     return Album.query.get(album_id)
+
+def get_album_by_title(title):
+    """Get album_id by title."""
+
+    return Album.query.filter(Album.title == title).first()
 
 def get_album_title_by_id(album_id):
     """Get album title by album_id."""

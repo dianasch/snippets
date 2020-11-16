@@ -94,7 +94,9 @@ class Album(db.Model):
 
     # Create table column for album thumbnail path as a string
     # Max limit of 2000 chars
-    thumbnail_path = db.Column(db.String(2000))
+    # Required field
+    thumbnail_path = db.Column(db.String(2000),
+                        nullable = False)
 
     # Create table column for album details as a text
     # Required field
@@ -114,6 +116,16 @@ class Album(db.Model):
 
     # Create SQLAlchemy relationship between artists and albums
     artist = db.relationship('Artist', backref='albums')
+
+    # Create table column for user_id as an integer
+    # Define foreign key from users table on user_id
+    # Not required field
+    user_id = db.Column(db.Integer,
+                        db.ForeignKey("users.user_id"),
+                        nullable = True)
+
+    # Create SQLAlchemy relationship between users and albums
+    user = db.relationship('User', backref='albums')
 
     # songs = a list of Song objects
     # snippets_albums = a list of Snippets_Albums objects

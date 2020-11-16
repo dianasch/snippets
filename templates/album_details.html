@@ -11,16 +11,41 @@
     {{ album.details }}
 </p>
 
-<p>Track Listing</p>
-{% for song in songs %}
+{% if songs %}
 
-<ul>
-    <li>{{ song.title }}</li>
-</ul>
-{% endfor %}
+    <p>Track Listing</p>
+    {% for song in songs %}
 
+    <ul>
+        <li>{{ song.title }}</li>
+    </ul>
+    {% endfor %}
 
-<button type="button" id="create-snippet">Create snippet</button>
+{% endif %}
+
+{% if album_id | int > 8 %}
+<form>
+    <label for="taylor-swift-album">Choose a Taylor Swift Album for your mash-up:</label><br>
+    <select name="taylor-swift-album" required>
+        <option value="1">Taylor Swift</option>
+        <option value="2">Fearless</option>
+        <option value="3">Red</option>
+        <option value="4">Speak Now</option>
+        <option value="5">1989</option>
+        <option value="6">reputation</option>
+        <option value="7">Lover</option>
+        <option value="8">folklore</option>
+        <option value="9">Choose a random Taylor Swift album</option>
+    </select><br>
+    <button type="submit" id="create-snippet">Create snippet</button>
+</form>
+
+{% else %}
+
+<button type="submit" id="create-snippet">Create snippet</button>
+
+{% endif %}
+
 
 
 <p id="display-snippet"></p>

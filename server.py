@@ -37,7 +37,8 @@ def show_album_details(album_id):
     songs = crud.get_songs_by_album(album_id)
 
     return render_template('album_details.html', album=album,
-                                                songs=songs)
+                                                songs=songs,
+                                                album_id=album_id)
 
 @app.route('/albums/<album_id>/snippet')
 def create_snippet(album_id):
@@ -71,11 +72,35 @@ def save_snippet(album_id):
 
     return redirect('/')
 
-@app.route('/user-form')
+@app.route('/user-album-form')
 def show_user_upload_form():
     """Display user form to upload new album."""
 
-    return render_template('user_form.html')
+    return render_template('user_album_form.html')
+
+@app.route('/user-album-upload', methods = ['POST'])
+def add_user_upload_to_db():
+    """Adds new album to db from user input form."""
+
+    artist = request.form.get('artist')
+    title = request.form.get('title')
+    thumbnail = request.form.get('thumbnail')
+    description = request.form.get('description')
+    lyrics = request.form.get('lyrics')
+    user_id = session['user']
+
+    crud.create_artist(artist)
+    crud.create_album(title,
+                    thumbnail,
+                    description,
+                    lyrics,
+                    crud.get_artist_by_name(artist),
+                    user_id)
+
+    album_id = crud.get_album_by_title(title)
+
+    return redirect('/albums/<album_id>')
+
 
 # @app.route('/bubble')
 # def create_bubble():

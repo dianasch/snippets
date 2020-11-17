@@ -29,6 +29,13 @@ def get_user_by_email(email):
 
     return User.query.filter(User.email == email).first()
 
+def get_albums_uploaded_by_user(user_id):
+    """Return a list of albums uploaded by user."""
+
+    albums = db.session.query(User.albums)
+
+    return albums.filter(User.user_id == user_id).one()
+
 # ARTIST FUNCTIONS
 
 def create_artist(name):
@@ -185,9 +192,7 @@ def get_user_album_snippet():
     album_id."""
 
     # Join snippets_albums table with snippets table and albums table
-    snippet_album_join = db.session.query(Snippet_Album).\
-        options(db.joinedload('album')).\
-        options(db.joinedload('snippet')).all()
+    snippet_album_join = db.session.query(Snippet_Album).options(db.joinedload('album')).options(db.joinedload('snippet')).all()
 
     # Set variable `user_dict` to empty dictionary
     user_dict = {}

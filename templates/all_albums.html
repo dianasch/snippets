@@ -3,18 +3,42 @@
 {% block title %}Taylor Swift Albums{% endblock %}
 
 {% block body %}
-    <h1>Choose a Taylor Swift Album</h1>
+    <h1>All Albums</h1>
+    <h2>Choose a Taylor Swift album</h2>
 
-    <div class="link-all-albums">
-    {% for album in albums %}
+    <div class="link-ts-albums">
+    {% for album in ts_albums %}
 
         <a href = "/albums/{{album.album_id}}"><img src={{album.thumbnail_path}}></a>
 
     {% endfor %}
     </div>
 
-    <button type="button" id="user-form">Upload your own album</button>
 
-    <div id="user-form"></div>
+    {% if 'user' in session %}
+
+    <h2>Choose one of your albums</h2>
+
+        {% if user_albums|length > 0 %}
+
+            <div class="link-user-albums">
+                {% for album in user_albums %}
+            
+                    <a href = "/albums/{{album.album_id}}"><img src={{album.thumbnail_path}}></a>
+            
+            {% endfor %}
+            </div>
+
+        {% else %}
+
+            <p>No albums uploaded yet!</p>
+
+        {% endif %}
+
+    <button type="button" id="user-album-form">Upload your own album</button>
+
+    <div id="show-user-form"></div>
+
+    {% endif %}
 
 {% endblock %}  

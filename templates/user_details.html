@@ -3,20 +3,39 @@
 {% block title %}{{ user.email }} - Profile{% endblock %}
 
 {% block body %}
-<h1>Favorite Snippets</h1>
 
-{% for keys, values in snippets.items() %}
+{% if 'user' in session and session['user'] == user.user_id %}
 
-<ul>
-    <li>{{ keys }}</li>
-    <ul>
-    {% for value in values %}
-    <li>{{ value }}</li>
-    {% endfor %}
-    </ul>
+    <h1>Favorite Snippets</h1>
 
+    {% if snippets|length > 0 %}
 
-</ul>
-{% endfor %}
+        {% for keys, values in snippets.items() %}
+
+        <ul>
+            <li>{{ keys }}</li>
+            <ul>
+            {% for value in values %}
+            <li>{{ value }}</li>
+            {% endfor %}
+            </ul>
+        </ul>
+        {% endfor %}
+
+    {% else %}
+
+        <p>No snippets saved yet!</p>
+
+    {% endif %}
+
+{% elif 'user' in session and session['user'] != user.user_id %}
+
+    <p>Oops! You do not have access to view other user profiles!</p>
+
+{% else %}
+
+    <p>Oops! Log in to view your profile!</p>
+
+{% endif %}
 
 {% endblock %}

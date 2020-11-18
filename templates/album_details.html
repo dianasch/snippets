@@ -24,28 +24,61 @@
 {% endif %}
 
 {% if album_id | int > 8 %}
-<form action='/albums/{{album.album_id}}/snippet' method="POST">
+<form action='/albums/{{album.album_id}}/snippet' id ="create-snippet">
     <label for="taylor-swift-album">Choose a Taylor Swift Album for your mash-up:</label><br>
     <select name="taylor-swift-album" required>
         <option disabled selected value> -- Select an option -- </option>
-        <option value="Taylor Swift">Taylor Swift</option>
-        <option value="Fearless">Fearless</option>
-        <option value="Red">Red</option>
-        <option value="Speak Now">Speak Now</option>
-        <option value="1989">1989</option>
-        <option value="reputation">reputation</option>
-        <option value="Lover">Lover</option>
-        <option value="folklore">folklore</option>
-        <option value="Random">Choose a random Taylor Swift album</option>
+        <option value="1">Taylor Swift</option>
+        <option value="2">Fearless</option>
+        <option value="3">Red</option>
+        <option value="4">Speak Now</option>
+        <option value="5">1989</option>
+        <option value="6">reputation</option>
+        <option value="7">Lover</option>
+        <option value="8">folklore</option>
+        <option value="9">Choose a random Taylor Swift album</option>
     </select><br>
-    <button type="submit" id="create-snippet">Create snippet</button>
+    <button type="submit">Create snippet</button>
 </form>
+
+<script>
+    $('#create-snippet').on('submit', (evt) => {
+        evt.preventDefault();
+
+        const requestRoute = $(evt.target).attr('action');
+        const requestArgs = {
+            'taylor-swift-album': $('select[name="taylor-swift-album"]').val()
+        }
+        console.log(`requestRoute = ${requestRoute}`);
+        console.log(`requestArgs= ${requestArgs}`);
+        
+        $.get(requestRoute, requestArgs, (res) => {
+            console.log('loaded', res);
+            $('#display-snippet').html(res);
+        });
+    });
+</script>
 
 {% else %}
 
-<form action='/albums/{{album.album_id}}/snippet'>
-<button type="submit" id="create-snippet">Create snippet</button>
+<form action='/albums/{{album.album_id}}/snippet' id="create-ts-snippet">
+<button type="submit">Create snippet</button>
 </form>
+
+<script>
+    $('#create-ts-snippet').on('submit', (evt) => {
+        evt.preventDefault();
+
+        const requestRoute = $(evt.target).attr('action');
+
+        console.log(`requestRoute = ${requestRoute}`);
+        
+        $.get(requestRoute, (res) => {
+            console.log('loaded', res);
+            $('#display-snippet').html(res);
+        });
+    });
+</script>
 
 {% endif %}
 

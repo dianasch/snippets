@@ -28,7 +28,20 @@ def show_all_albums():
 
     albums = crud.return_all_albums()
 
-    return render_template('all_albums.html', albums=albums)
+    # If user is not logged in, only show Taylor Swift albums
+    ts_albums = albums[:8]
+
+    # If user is logged in
+    if 'user' in session:
+        
+        # Show albums uploaded by user as well
+        user_albums = crud.get_albums_uploaded_by_user(session['user'])
+
+    else:
+
+        user_albums = []
+
+    return render_template('all_albums.html', ts_albums=ts_albums, user_albums=user_albums)
 
 @app.route('/albums/<album_id>')
 def show_album_details(album_id):
@@ -41,31 +54,54 @@ def show_album_details(album_id):
                                                 songs=songs,
                                                 album_id=album_id)
 
-@app.route('/albums/<album_id>/snippet', methods = ['GET', 'POST'])
+@app.route('/albums/<album_id>/snippet', methods = ['GET'])
 def create_snippet(album_id):
     """Create and display Markov song snippet from album lyrics."""
 
     album = crud.get_album_by_id(album_id)
     title = crud.get_album_title_by_id(album_id)
-    choice = request.values.get('taylor-swift-album')
 
+    # User selection from drop-down menu for Taylor Swift album
+    ts_album = request.args.get("taylor-swift-album")
+
+    # print("************************")
+    # print(album)
+    # print(title)
+    # print(type(ts_album))
+    # print(ts_album)
+
+    # Determine if current album is a Taylor Swift album
     if int(album_id) <= 8:
         
+        # If so, get full lyrics for Taylor Swift album
         lyrics = crud.get_album_lyrics_by_id(album_id)
     
+    # Determine if current album is a user-uploaded album
     elif int(album_id) > 8:
 
-        if choice == "Random":
+        # Determine if user selection from drop-down menu is a random
+        # Taylor Swift album
+        if ts_album == "9":
 
+            # If so, get full lyrics for current user-loaded album and
+            # get full lyrics for a random Taylor Swift album
             lyrics = crud.get_album_lyrics_by_id(album_id) + crud.get_album_lyrics_by_id(random.randint(1, 8))
 
+        # Otherwise, user selection from down-down menu is a specific
+        # Taylor Swift album
         else:
 
-            lyrics = crud.get_album_lyrics_by_id(album_id) + crud.get_album_lyrics_by_title(str(choice))
+            # Get full lyrics for current user-loaded album and
+            # get full lyrics for specific Taylor Swift album
+            lyrics = crud.get_album_lyrics_by_id(album_id) + crud.get_album_lyrics_by_id(int(ts_album))
 
-            
+    # Create Markov chains from full album lyrics
     chains = markov.make_chains(lyrics)
+
+    # Create song snippet from `chains`
     snippet = markov.make_text(chains)
+
+    # Store song snippet in session
     session['snippet'] = snippet
 
     return render_template('snippet.html', title=title, snippet=snippet, album=album)
@@ -85,7 +121,7 @@ def save_snippet(album_id):
     else:
         flash('Log in to save your snippet!')
 
-    return redirect('/')
+    return redirect(f"/all-users/{session['user']}")
 
 @app.route('/user-album-form')
 def show_user_upload_form():
@@ -116,17 +152,6 @@ def add_user_upload_to_db():
 
     return redirect('/albums/album_id')
 
-
-# @app.route('/bubble')
-# def create_bubble():
-
-#     return render_template('bubble.html')
-
-# @app.route('/bar')
-# def create_bar():
-
-#     return render_template('bar.html')
-
 @app.route('/all-users')
 def show_all_users():
     """View all users."""
@@ -142,7 +167,19 @@ def user_details(user_id):
     user = crud.get_user_by_id(user_id)
     user_dict = crud.get_user_album_snippet()
 
-    snippets = user_dict[int(user_id)]
+    # user_dict contains Snippet_Album items
+    # If user has not saved any snippets yet, user will not be in user_dict
+    try:
+
+        snippets = user_dict[int(user_id)]
+
+    # If user is not in user_dict, attempting to look up user will result
+    # in a KeyError
+    except KeyError:
+
+        # If user is not in user_dict, there are no snippets saved
+        # Set `snippets` to empty list
+        snippets = []
 
     return render_template('user_details.html', user=user,
                                                 snippets=snippets)

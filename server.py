@@ -147,10 +147,9 @@ def add_user_upload_to_db():
                     lyrics,
                     crud.get_artist_by_name(artist),
                     user_id)
+    flash("Album saved!")
 
-    album_id = crud.get_album_by_title(title)
-
-    return redirect('/albums/album_id')
+    return redirect('/albums')
 
 @app.route('/all-users')
 def show_all_users():

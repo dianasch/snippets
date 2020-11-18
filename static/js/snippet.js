@@ -22,3 +22,26 @@ $(document).ready(function() {
 
     });
 });
+
+$(document).ready(function() {
+    $('#user-album-upload').submit(function(evt) {
+        evt.preventDefault();
+
+        const requestArgs = {
+            'thumbnail': $('select[name="thumbnail"]').val()
+        }
+
+        $.ajax({
+        type: "HEAD",
+        url : requestArgs['thumbnail'],
+        success: function(message,text,response){
+            console.log(response);
+            console.log(response.getResponseHeader('Content-Type'));
+            if(response.getResponseHeader('Content-Type').indexOf("image") === -1){
+            alert("Not an image");
+        }
+        } 
+    });
+    });
+});
+

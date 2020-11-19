@@ -49,10 +49,13 @@ def show_album_details(album_id):
 
     album = crud.get_album_by_id(album_id)
     songs = crud.get_songs_by_album(album_id)
+    lyrics = crud.get_album_lyrics_by_id(album_id)
+    chart_data = markov.most_common(lyrics)
 
     return render_template('album_details.html', album=album,
                                                 songs=songs,
-                                                album_id=album_id)
+                                                album_id=album_id,
+                                                chart_data=chart_data)
 
 @app.route('/albums/<album_id>/snippet', methods = ['GET'])
 def create_snippet(album_id):
@@ -63,12 +66,6 @@ def create_snippet(album_id):
 
     # User selection from drop-down menu for Taylor Swift album
     ts_album = request.args.get("taylor-swift-album")
-
-    # print("************************")
-    # print(album)
-    # print(title)
-    # print(type(ts_album))
-    # print(ts_album)
 
     # Determine if current album is a Taylor Swift album
     if int(album_id) <= 8:

@@ -93,25 +93,6 @@ def make_text(chains):
 # print(random_text)
 
 
-def count_words(text):
-
-    clean_text = re.sub("^\w\d'\s]+",' ', text)
-    words = clean_text.replace('?', ' ').lower().strip().split()
-
-    count = {}
-
-    for word in words:
-
-        if word in count:
-
-            count[word] = count.get(word) + 1
-        
-        else:
-
-            count[word] = 1
-    
-    return count
-
 f = open_and_read_file('folklore.txt')
 f2 = open_and_read_file('1989.txt')
 f3 = open_and_read_file('Lover.txt')
@@ -123,19 +104,58 @@ f8 = open_and_read_file('Red.txt')
 
 def most_common(text):
 
+    # Remove certain punctuation from album lyrics
     remove = text.lower().replace('?', ' ').replace('(', ' ').replace(')', ' ').replace(',', ' ')
+
+    # Regex to find words
     clean_text = re.sub("^\w\d'\s]+",' ', remove)
+
+    # List of clean words split into a list
     words = clean_text.strip().split()
 
-    # set(['the', 'and','to', 'a', 'in', 'of', 'on'])
+    # Set of words that are too common to include in chart
+    remove_set = set(['the', 'and','to', 'a', 'in', 'of', 'on'])
 
-    return Counter(words).most_common(27)
+    # List of tuples with first item as word, second item as word count
+    # Return 22 most common words in the album to accommodate for additional
+    # words if all `remove` words appear in most common words
+    # The desired result is a list of 15 most common words
+    common = Counter(words).most_common(22)
+
+    # Set variable `labels` to empty list to keep track of most common words
+    # Labels for bar graph
+    labels = []
+
+    # Set variable `data` to empty list to keep track of num of occurrences
+    # of most common words
+    # Data for bar graph
+    data = []
+
+    # Loop through each word in `common`
+    for word in common:
+
+        # Limit top 15 words
+        if len(labels) < 15:
+
+            # If word is not in set of words to remove
+            if word[0] not in remove_set:
+
+                # Add capitalized word to list of labels
+                labels.append(word[0].capitalize())
+
+                # Add num of occurrences to list of data
+                data.append(word[1])
+
+    return tuple([labels, data])
 
 
-def least_common(text):
+# Code below to find 20 most unique words in an album
+# Not currently implemented in app, but available for future use
 
-    remove = text.lower().replace('?', ' ').replace('(', ' ').replace(')', ' ').replace(',', ' ')
-    clean_text = re.sub("^\w\d'\s]+",' ', remove)
-    words = clean_text.strip().split()
+# def least_common(text):
 
-    return Counter(words).most_common()[-19:]
+#     remove = text.lower().replace('?', ' ').replace('(', ' ').replace(')', ' ').replace(',', ' ')
+#     clean_text = re.sub("^\w\d'\s]+",' ', remove)
+#     words = clean_text.strip().split()
+
+#     return Counter(words).most_common()[-19:]

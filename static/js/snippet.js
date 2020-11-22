@@ -35,15 +35,17 @@ $(document).ready(function() {
 
         const thumbnailURL = requestArgs['thumbnail'];
 
+        // $.ajax({
+        //     type: 
+        // })
+
+
+
+
         $.ajax({
         type: "HEAD",
         url : requestArgs['thumbnail'],
         success: function(message,text,response){
-
-            console.log(response);
-            console.log(response.getResponseHeader('Content-Type'));
-            console.log(text);
-            console.log(response.getResponseHeader('Content-Type').indexOf("image"));
             if (response.getResponseHeader('Content-Type').indexOf("image") === -1){
 
                 for (const extension of extensions) {
@@ -53,13 +55,14 @@ $(document).ready(function() {
                         return;
                     }
                 }
-                
                 alert("Oops! Not a valid image! Please submit a valid link for your album thumbnail.");
             }
             else {
                 evt.currentTarget.submit();
             }
-        
+        },
+        error: function(request, status, error) {
+            alert("Oops! Not a valid image! Please submit a valid link for your album thumbnail.")
         }
         }); 
     });

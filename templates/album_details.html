@@ -88,12 +88,25 @@
 
 
 <div class="chart-container" style="position: relative; height:30vh; width:50vw">
-    <canvas id="myChart"></canvas>
+    <canvas id="albumChart"></canvas>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <script>
-const ctx = document.getElementById('myChart');
+const ctx = document.getElementById('albumChart');
 const chartData = {{chart_data|tojson}};
+
+const bgColorList = [];
+
+for (const i in chartData[1]) {
+    bgColorList.push(`rgba(0, 102, 102, ${(chartData[1][i] / chartData[1][0]) * 2.5}`);       
+    };
+
+const bgBorderList = [];
+
+for (const i in chartData[1]) {
+    bgColorList.push(`rgba(0, 153, 153, ${(chartData[1][i] / chartData[1][0]) * 2.5}`);       
+    };
+
  myChart = new Chart(ctx, {
     type: 'bar',
     data: {
@@ -101,40 +114,8 @@ const chartData = {{chart_data|tojson}};
         datasets: [{
             label: '# of Occurences',
             data: chartData[1],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)',
-                'rgba(255, 159, 64, 0.2)',
-                'rgba(255, 159, 64, 0.2)',
-                'rgba(255, 159, 64, 0.2)',
-                'rgba(255, 159, 64, 0.2)',
-                'rgba(255, 159, 64, 0.2)',
-                'rgba(255, 159, 64, 0.2)',
-                'rgba(255, 159, 64, 0.2)',
-                'rgba(255, 159, 64, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)',
-                'rgba(255, 159, 64, 1)',
-                'rgba(255, 159, 64, 1)',
-                'rgba(255, 159, 64, 1)',
-                'rgba(255, 159, 64, 1)',
-                'rgba(255, 159, 64, 1)',
-                'rgba(255, 159, 64, 1)',
-                'rgba(255, 159, 64, 1)',
-                'rgba(255, 159, 64, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
+            backgroundColor: bgColorList,
+            borderColor: bgBorderList,
             borderWidth: 1
         }]
     },
@@ -154,67 +135,5 @@ const chartData = {{chart_data|tojson}};
 });
 </script>
 
-<!-- <div id="container" style="width: 75%;">
-    <canvas id="canvas"></canvas>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-
-<script>
-
-    var barChartData = {
-        labels: ["Step 1", "Step 2", "Step 3", "Step 4", "Step 5"],
-        datasets: [{
-            label: 'Dataset 1',
-            backgroundColor: "#0B84A5",
-            borderColor: '#F6C85F',
-            data: [1500, 1200, 1000, 800, 400]
-        }]
-
-    };
-
-    window.onload = function() {
-        var ctx = document.getElementById("canvas").getContext("2d");
-        window.myBar = new Chart(ctx, {
-            type: 'barFunnel',
-            data: barChartData,
-            options: {
-                // Elements options apply to all of the options unless overridden in a dataset
-                // In this case, we are setting the border of each bar to be 2px wide and green
-                elements: {
-                    rectangle: {
-                        borderWidth: 2,
-                        borderColor: '0B84A5',
-                        borderSkipped: 'bottom',
-                        stepLabel: {
-                            display: true,
-                            fontSize: 20,
-                            // color: "red"
-                        }
-                    }
-                },
-                region: {
-                  display: true
-                },
-                responsive: true,
-                legend: {
-                    position: 'top',
-                },
-                scales: {
-                  yAxes: [{
-                      ticks: {
-                          beginAtZero:true
-                      }
-                  }]
-                },
-                title: {
-                    display: true,
-                    text: 'Chart.js Bar Funnel Chart'
-                }
-            }
-        });
-
-    };
-
-</script> -->
 
 {% endblock %}

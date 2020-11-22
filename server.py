@@ -19,7 +19,6 @@ app.jinja_env.undefined = StrictUndefined
 def get_homepage():
     """View homepage."""
 
-
     return render_template('homepage.html')
 
 @app.route('/albums')
@@ -37,6 +36,7 @@ def show_all_albums():
         # Show albums uploaded by user as well
         user_albums = crud.get_albums_uploaded_by_user(session['user'])
 
+    # Otherwise, if user is not logged in, there are no user_albums
     else:
 
         user_albums = []
@@ -67,33 +67,35 @@ def create_snippet(album_id):
     # User selection from drop-down menu for Taylor Swift album
     ts_album = request.args.get("taylor-swift-album")
 
-    # Determine if current album is a Taylor Swift album
-    if int(album_id) <= 8:
-        
-        # If so, get full lyrics for Taylor Swift album
-        lyrics = crud.get_album_lyrics_by_id(album_id)
-    
-    # Determine if current album is a user-uploaded album
-    elif int(album_id) > 8:
+    # Get full lyrics for the current album id page
+    lyrics = crud.get_album_lyrics_by_id(album_id)
+
+    # Determine if there is a value for ts_album
+    # If so, user is on a user album page to make a mash-up
+    if ts_album:
 
         # Determine if user selection from drop-down menu is a random
         # Taylor Swift album
         if ts_album == "9":
 
-            # If so, get full lyrics for current user-loaded album and
-            # get full lyrics for a random Taylor Swift album
-            lyrics = crud.get_album_lyrics_by_id(album_id) + crud.get_album_lyrics_by_id(random.randint(1, 8))
+            # If so, get full lyrics for a random Taylor Swift album
+            ts_lyrics = crud.get_album_lyrics_by_id(random.randint(1, 8))
 
-        # Otherwise, user selection from down-down menu is a specific
-        # Taylor Swift album
+        # Or if user selection is a specific Taylor Swift album
         else:
 
-            # Get full lyrics for current user-loaded album and
-            # get full lyrics for specific Taylor Swift album
-            lyrics = crud.get_album_lyrics_by_id(album_id) + crud.get_album_lyrics_by_id(int(ts_album))
+            # Get full lyrics for specific Taylor Swift album
+            ts_lyrics = crud.get_album_lyrics_by_id(int(ts_album))
+
+    # Otherwise, there is no ts_album because we are on a Taylor Swift
+    # album page
+    else:
+
+        # Set `ts_lyrics` to an empty string
+        ts_lyrics = ""
 
     # Create Markov chains from full album lyrics
-    chains = markov.make_chains(lyrics)
+    chains = markov.make_chains(lyrics + ts_lyrics)
 
     # Create song snippet from `chains`
     snippet = markov.make_text(chains)
@@ -130,6 +132,7 @@ def show_user_upload_form():
 def add_user_upload_to_db():
     """Adds new album to db from user input form."""
 
+    # Get user input from album upload form
     artist = request.form.get('artist')
     title = request.form.get('title')
     thumbnail = request.form.get('thumbnail')
@@ -137,7 +140,18 @@ def add_user_upload_to_db():
     lyrics = request.form.get('lyrics')
     user_id = session['user']
 
-    crud.create_artist(artist)
+    # Check if artist is already in db
+    try:
+        
+        crud.get_artist_by_name(artist)
+
+    # If artist not in db, getting artist will return a KeyError
+    except KeyError:
+
+        # Add artist to db
+        crud.create_artist(artist)
+
+    # Add album to db
     crud.create_album(title,
                     thumbnail,
                     description,
@@ -165,6 +179,7 @@ def user_details(user_id):
 
     # user_dict contains Snippet_Album items
     # If user has not saved any snippets yet, user will not be in user_dict
+    # Try checking if user is in user_dict
     try:
 
         snippets = user_dict[int(user_id)]
@@ -212,6 +227,17 @@ def log_in():
     else:
         flash('Email and password do not match.')
     
+    return redirect('/')
+
+@app.route('/logout', methods = ['POST'])
+def log_out():
+
+    if 'user' in session:
+
+        del session['user']
+
+        flash("Logged out!")
+
     return redirect('/')
 
 if __name__ == "__main__":

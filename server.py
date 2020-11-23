@@ -2,7 +2,7 @@
 
 from flask import (Flask, render_template, request, flash, session,
                     redirect, jsonify)
-from flask_login import LoginManager, login_user, login_required, logout_user
+from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 from jinja2 import StrictUndefined
 from urllib.parse import urlparse, urljoin
 import random
@@ -36,10 +36,10 @@ def show_all_albums():
     ts_albums = albums[:8]
 
     # If user is logged in
-    if 'user' in session:
+    if current_user:
         
         # Show albums uploaded by user as well
-        user_albums = crud.get_albums_uploaded_by_user(session['user'])
+        user_albums = crud.get_albums_uploaded_by_user(current_user.get_id())
 
     # Otherwise, if user is not logged in, there are no user_albums
     else:
@@ -257,7 +257,7 @@ def log_in():
     return redirect('/')
 
 @app.route('/logout', methods = ['POST'])
-@login_required.
+@login_required
 def log_out():
     """Log a user out."""
 

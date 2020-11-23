@@ -118,14 +118,14 @@ def save_snippet(album_id):
     snippet = session['snippet']
 
 
-    if session['user']:
-        db_snippet = crud.create_snippet(snippet, crud.get_user_by_id(session['user']))
+    if current_user:
+        db_snippet = crud.create_snippet(snippet, crud.get_user_by_id(current_user.get_id()))
         snippet_album = crud.create_snippet_album(db_snippet, album)
         flash('Snippet saved!')
     else:
         flash('Log in to save your snippet!')
 
-    return redirect(f"/all-users/{session['user']}")
+    return redirect(f"/all-users/{current_user.get_id()}")
 
 @app.route('/user-album-form')
 def show_user_upload_form():
@@ -143,7 +143,7 @@ def add_user_upload_to_db():
     thumbnail = request.form.get('thumbnail')
     description = request.form.get('description')
     lyrics = request.form.get('lyrics')
-    user_id = session['user']
+    user_id = current_user.get_id()
 
     # Check if artist is already in db
     try:

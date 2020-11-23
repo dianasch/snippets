@@ -50,6 +50,19 @@ class User(db.Model):
 
         return f"<User user_id={self.user_id} email={self.email}>"
 
+    # Replicate Flask Usermixin methods
+    def is_authenticated(self):
+        return True
+    
+    def is_active(self):
+        return True
+
+    def is_anonymous(self):
+        return False
+    
+    def get_id(self):
+        return str(self.user_id)
+
 
 class Artist(db.Model):
     """A music artist. Subclass of db.Model."""

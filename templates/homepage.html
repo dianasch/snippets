@@ -29,7 +29,6 @@
         <div class="create-account">
         <form action="/users" id="create-account" method="POST">
             <label><h3>Create An Account</h3></label>
-            
             <p>
             Email <input type="text" name="email"><br>
             Password <input type="password" name="password"><br><br>
@@ -37,19 +36,19 @@
             </p>
         </form>
         </div>
-        <h2>Log In</h2>
+
+    <br><button type="button" id="show-login">Log In</button>
+
+        <div class="login">
         <form action="/login" id="login" method="POST">
+            <label><h3>Log In</h3></label>
             <p>
-            Email <input type="text" name="email">
+            Email <input type="text" name="email"><br>
+            Password <input type="password" name="password"><br><br>
+            <input type="submit">
             </p>
-
-            <p>
-                Password <input type="password" name="password">
-            </p>
-
-            <p>
-                <input type="submit">
-            </p>
+        </form>
+        </div>
 
     {% endif %}
 

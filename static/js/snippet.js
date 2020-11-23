@@ -23,7 +23,6 @@ $(document).ready(function() {
     });
 });
 
-
 $(document).ready(function() {
 
     $('#create-account').hide();
@@ -31,6 +30,18 @@ $(document).ready(function() {
     $('#show-create-account').on({
         click: function(){
             $('#create-account').toggle();
+        }
+    });
+
+});
+
+$(document).ready(function() {
+
+    $('#login').hide();
+
+    $('#show-login').on({
+        click: function(){
+            $('#login').toggle();
         }
     });
 

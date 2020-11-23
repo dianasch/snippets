@@ -4,7 +4,7 @@
 
 {% block body %}
 
-{% if 'user' in session and session['user'] == user.user_id %}
+{% if current_user.is_authenticated and current_user == user %}
 
     <h1>Favorite Snippets</h1>
 
@@ -28,7 +28,7 @@
 
     {% endif %}
 
-{% elif 'user' in session and session['user'] != user.user_id %}
+{% elif current_user.is_authenticated and current_user != user %}
 
     <p>Oops! You do not have access to view other user profiles!</p>
 

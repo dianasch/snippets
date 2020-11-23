@@ -11,7 +11,7 @@
     
     {% if current_user.is_authenticated %}
 
-        <li><a href="/all-users/{{current_user}}" id="view-snippets">View user profile</a></li>
+        <li><a href="/all-users/{{current_user.get_id()}}" id="view-snippets">View user profile</a></li>
 
     </ul>
 

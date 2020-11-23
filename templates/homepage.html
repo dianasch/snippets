@@ -9,9 +9,9 @@
     <ul>
         <li><a href="/albums">View all albums</a></li>
     
-    {% if 'user' in session %}
+    {% if current_user.is_authenticated %}
 
-        <li><a href="/all-users/{{session['user']}}" id="view-snippets">View user profile</a></li>
+        <li><a href="/all-users/{{current_user}}" id="view-snippets">View user profile</a></li>
 
     </ul>
 
@@ -22,7 +22,7 @@
     {% endif %}
     
 
-    {% if 'user' not in session %}
+    {% if not current_user.is_authenticated %}
 
         <div class="create-account">
         <h2>Create an Account</h2>

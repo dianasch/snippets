@@ -221,6 +221,7 @@ def load_user(user_id):
 
     return crud.get_user_by_id(user_id)
 
+# Flask snippet to check for a safe URL
 def is_safe_url(target):
     ref_url = urlparse(request.host_url)
     test_url = urlparse(urljoin(request.host_url, target))
@@ -228,8 +229,7 @@ def is_safe_url(target):
 
 @app.route('/login', methods = ['POST'])
 def log_in():
-    """Gets input from log-in and checks to see if email and password
-    match."""
+    """Log a user in."""
 
     email = request.form.get('email')
     password = request.form.get('password')
@@ -257,13 +257,12 @@ def log_in():
     return redirect('/')
 
 @app.route('/logout', methods = ['POST'])
+@login_required.
 def log_out():
+    """Log a user out."""
 
-    if 'user' in session:
-
-        del session['user']
-
-        flash("Logged out!")
+    logout_user()
+    flash("Logged out!")
 
     return redirect('/')
 

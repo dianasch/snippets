@@ -2,7 +2,9 @@
 
 from flask import (Flask, render_template, request, flash, session,
                     redirect, jsonify)
+from flask_login import LoginManager, login_user, login_required, logout_user
 from jinja2 import StrictUndefined
+from urllib.parse import urlparse, urljoin
 import random
 import requests
 import os
@@ -14,6 +16,9 @@ import markov
 app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY")
 app.jinja_env.undefined = StrictUndefined
+
+login_manager = LoginManager()
+login_manager.init_app(app)
 
 @app.route('/')
 def get_homepage():
@@ -211,6 +216,16 @@ def register_user():
 
     return redirect('/')
 
+@login_manager.user_loader
+def load_user(user_id):
+
+    return crud.get_user_by_id(user_id)
+
+def is_safe_url(target):
+    ref_url = urlparse(request.host_url)
+    test_url = urlparse(urljoin(request.host_url, target))
+    return test_url.scheme in ('http', 'https') and ref_url.netloc == test_url.netloc
+
 @app.route('/login', methods = ['POST'])
 def log_in():
     """Gets input from log-in and checks to see if email and password
@@ -220,13 +235,25 @@ def log_in():
     password = request.form.get('password')
     user = crud.get_user_by_email(email)
 
-    if email == user.email and password == user.password:
-        session['user'] = user.user_id
-        flash('Logged in!')
+    if user:
 
-    else:
-        flash('Email and password do not match.')
+        if password == user.password:
+            login_user(user)
+            flash('Logged in!')
+
+            next = request.args.get('next')
+
+            if not is_safe_url(next):
+                return abort(400)
+
+            return redirect(next or '/')
+
+        else:
+            flash('Email and password do not match.')
     
+    else:
+        flash('There is no account associated with this email. Please create an account!')
+
     return redirect('/')
 
 @app.route('/logout', methods = ['POST'])

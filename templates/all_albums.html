@@ -15,7 +15,7 @@
     </div>
 
 
-    {% if 'user' in session %}
+    {% if current_user.is_authenticated %}
 
     <h2>Choose one of your albums</h2>
 

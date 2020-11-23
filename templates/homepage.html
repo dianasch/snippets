@@ -24,19 +24,16 @@
 
     {% if not current_user.is_authenticated %}
 
+    <br><button type="button" id="show-create-account">Create an account</button>
+
         <div class="create-account">
-        <h2>Create an Account</h2>
-        <form action="/users" method="POST">
+        <form action="/users" id="create-account" method="POST">
+            <label><h3>Create An Account</h3></label>
+            
             <p>
-            Email <input type="text" name="email">
-            </p>
-
-            <p>
-                Password <input type="password" name="password">
-            </p>
-
-            <p>
-                <input type="submit">
+            Email <input type="text" name="email"><br>
+            Password <input type="password" name="password"><br><br>
+            <input type="submit">
             </p>
         </form>
         </div>

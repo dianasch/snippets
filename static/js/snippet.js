@@ -23,6 +23,19 @@ $(document).ready(function() {
     });
 });
 
+
+$(document).ready(function() {
+
+    $('#create-account').hide();
+
+    $('#show-create-account').on({
+        click: function(){
+            $('#create-account').toggle();
+        }
+    });
+
+});
+
 $(document).ready(function() {
     $('#user-album-upload').submit(function(evt) {
         evt.preventDefault();
@@ -34,13 +47,6 @@ $(document).ready(function() {
         const extensions = [".bmp", ".jpg", ".jpeg", ".jfif", ".pjpeg", ".pjp", ".png", ".tif", ".tiff", ".ico", ".cur"];
 
         const thumbnailURL = requestArgs['thumbnail'];
-
-        // $.ajax({
-        //     type: 
-        // })
-
-
-
 
         $.ajax({
         type: "HEAD",

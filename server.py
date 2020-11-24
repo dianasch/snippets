@@ -36,7 +36,7 @@ def show_all_albums():
     ts_albums = albums[:8]
 
     # If user is logged in
-    if current_user:
+    if current_user.is_authenticated:
         
         # Show albums uploaded by user as well
         user_albums = crud.get_albums_uploaded_by_user(current_user.get_id())
@@ -118,7 +118,7 @@ def save_snippet(album_id):
     snippet = session['snippet']
 
 
-    if current_user:
+    if current_user.is_authenticated:
         db_snippet = crud.create_snippet(snippet, crud.get_user_by_id(current_user.get_id()))
         snippet_album = crud.create_snippet_album(db_snippet, album)
         flash('Snippet saved!')

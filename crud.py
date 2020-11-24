@@ -32,7 +32,7 @@ def get_user_by_email(email):
 def get_albums_uploaded_by_user(user_id):
     """Return a list of albums uploaded by user."""
 
-    return (get_user_by_id(user_id)).albums
+    return get_user_by_id(user_id).albums
 
 # ARTIST FUNCTIONS
 

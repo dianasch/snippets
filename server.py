@@ -208,11 +208,24 @@ def register_user():
     password = request.form.get('password')
     user = crud.get_user_by_email(email)
     print(user)
-    if user == None:
-        crud.create_user(email, password)
-        flash('Account created! You can now log in.')
-    else:    
-        flash('Email already exists.')
+
+    # Check that user entered values for email and password
+    if email != "" and password != "":
+
+        # If there is no user with email in db
+        if user == None:
+
+            # Create new user
+            crud.create_user(email, password)
+            flash('Account created! You can now log in.')
+        
+        # Otherwise, notify user that email already in db
+        else:    
+            flash('Email already exists.')
+    
+    # Notify user that they must enter values for email and password
+    else:
+        flash('Please enter an email and a password.')
 
     return redirect('/')
 

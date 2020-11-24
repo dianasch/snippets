@@ -1,3 +1,17 @@
+
+/* body, html {
+    background: black;
+    opacity: 0.25
+    } */
+
+/* body, html {
+    background: url("/static/images/c-d-x-PDX_a_82obo-unsplash.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    } */
+
 img {
     height: 250px;
     width: 250px;

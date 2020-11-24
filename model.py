@@ -38,8 +38,8 @@ class User(db.Model):
                     unique = True)
 
     # Create table column for password as a string
-    # Max limit of 20 chars, required field
-    password = db.Column(db.String(20),
+    # Max limit of 100 chars, required field
+    password = db.Column(db.String(100),
                         nullable = False)
 
     # snippets = a list of Snippet objects saved by user

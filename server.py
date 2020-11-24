@@ -2,9 +2,11 @@
 
 from flask import (Flask, render_template, request, flash, session,
                     redirect, jsonify)
-from flask_login import LoginManager, login_user, login_required, logout_user, current_user
+from flask_login import (LoginManager, login_user, login_required, 
+                    logout_user, current_user)
 from jinja2 import StrictUndefined
-from urllib.parse import urlparse, urljoin
+from urllib.parse import (urlparse, urljoin)
+from werkzeug.security import (generate_password_hash, check_password_hash)
 import random
 import requests
 import os
@@ -205,23 +207,23 @@ def register_user():
     """Get inputs from create account form."""
 
     email = request.form.get('email')
-    password = request.form.get('password')
+    hashed_password = generate_password_hash(request.form.get('password'), method="sha256")
     user = crud.get_user_by_email(email)
     print(user)
 
     # Check that user entered values for email and password
-    if email != "" and password != "":
+    if email != "" and hashed_password != "":
 
         # If there is no user with email in db
         if user == None:
 
             # Create new user
-            crud.create_user(email, password)
+            crud.create_user(email, hashed_password)
             flash('Account created! You can now log in.')
         
         # Otherwise, notify user that email already in db
         else:    
-            flash('Email already exists.')
+            flash('There is already an account associated with this email.')
     
     # Notify user that they must enter values for email and password
     else:
@@ -231,6 +233,7 @@ def register_user():
 
 @login_manager.user_loader
 def load_user(user_id):
+    """Flask user loader callback."""
 
     return crud.get_user_by_id(user_id)
 
@@ -245,15 +248,20 @@ def log_in():
     """Log a user in."""
 
     email = request.form.get('email')
-    password = request.form.get('password')
+    # hashed_password = request.form.get('password')
     user = crud.get_user_by_email(email)
 
+    # Check if user exists in db
     if user:
 
-        if password == user.password:
+        # Check if entered password matches password in db
+        if check_password_hash(user.password, request.form.get('password')):
+
+            # If so, login user
             login_user(user)
             flash('Logged in!')
 
+            # Check if next URL is safe
             next = request.args.get('next')
 
             if not is_safe_url(next):
@@ -261,9 +269,11 @@ def log_in():
 
             return redirect(next or '/')
 
+        # If passwords do not match, notify user
         else:
             flash('Email and password do not match.')
     
+    # If user does not exist in db, notify user
     else:
         flash('There is no account associated with this email. Please create an account!')
 

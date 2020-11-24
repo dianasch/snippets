@@ -2,7 +2,63 @@
 {% block title %}Snippets Home{% endblock %}
 
 {% block body %}
-    <h1>Snippets</h1>
+
+
+<body class="text-center">
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+<header class="masthead mb-auto">
+    <div class="inner">
+        <h3 class="masthead-brand">Snippets</h3>
+        <nav>
+            <ul class="nav masthead-nav">
+            <li class="active"><a href="/">Home</a></li><br>
+            <li><a href="/albums">All Albums</a></li><br>
+            {% if current_user.is_authenticated %}
+            <li><a href="/all-users/{{current_user.get_id()}}" id="view-snippets">User Profile</a></li><br>
+            <li>
+                <form action='/logout' id="logout" method="POST">
+                <button type="submit">Log out</button>
+                </form>
+            </li>
+            {% endif %}
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main role="main" class="inner cover">
+    <h1 class="cover-heading">Let's make an original Taylor Swift song snippet!</h1>
+    {% if not current_user.is_authenticated %}
+
+    <p class="lead">
+        <button type="button" id="show-create-account">Create An Account</button>
+        <form action="/users" id="create-account" method="POST">
+            <label><h3>Create An Account</h3></label>
+            <p>
+                Email <input type="text" name="email"><br><br>
+                Password <input type="password" name="password"><br><br>
+                <input type="submit">
+            </p>
+        </form>
+    </p>
+    <p class="lead">
+        <button type="button" id="show-login">Log In</button>
+        <form action="/login" id="login" method="POST">
+            <label><h3>Log In</h3></label>
+            <p>Email <input type="text" name="email"></p>
+            <p>Password <input type="password" name="password"></p>
+            <input type="submit">
+        </form>
+    </p>
+    {% endif %}
+</main>
+
+</div>
+</body>
+
+
+
+    <!-- <h1>Snippets</h1>
 
     <h2>Let's make an original Taylor Swift song snippet!</h2>
 
@@ -13,16 +69,16 @@
 
         <li><a href="/all-users/{{current_user.get_id()}}" id="view-snippets">View user profile</a></li>
 
-    </ul>
+    </ul> -->
 
-        <form action='/logout' id="logout" method="POST">
+        <!-- <form action='/logout' id="logout" method="POST">
             <button type="submit">Log out</button>
         </form>
 
-    {% endif %}
+    {% endif %} -->
     
 
-    {% if not current_user.is_authenticated %}
+    <!-- {% if not current_user.is_authenticated %}
 
     <br><button type="button" id="show-create-account">Create An Account</button>
 
@@ -48,6 +104,6 @@
         </form>
         </div>
 
-    {% endif %}
+    {% endif %} -->
 
 {% endblock %}

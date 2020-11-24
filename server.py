@@ -153,7 +153,7 @@ def save_snippet(album_id):
     else:
         flash('Log in to save your snippet!')
 
-    return redirect(f"/all-users/{current_user.get_id()}")
+    return redirect(f"/user/{current_user.get_id()}")
 
 @app.route('/user-album-form')
 def show_user_upload_form():

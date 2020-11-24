@@ -147,13 +147,8 @@ def add_user_upload_to_db():
     lyrics = request.form.get('lyrics')
     user_id = current_user.get_id()
 
-    # Check if artist is already in db
-    try:
-        
-        crud.get_artist_by_name(artist)
-
-    # If artist not in db, getting artist will return a KeyError
-    except KeyError:
+    # If artist not already in db
+    if not crud.get_artist_by_name(artist):
 
         # Add artist to db
         crud.create_artist(artist)

@@ -32,6 +32,7 @@ def get_homepage():
 def show_all_albums():
     """View all albums."""
 
+    # Return all albums in db
     albums = crud.return_all_albums()
 
     # If user is not logged in, only show Taylor Swift albums
@@ -54,9 +55,18 @@ def show_all_albums():
 def show_album_details(album_id):
     """Show details on specific albums."""
 
+    # Return album by album_id in db
     album = crud.get_album_by_id(album_id)
+
+    # Return songs in an album by album_id in db
     songs = crud.get_songs_by_album(album_id)
+
+    # Return album lyrics by album_id in db
     lyrics = crud.get_album_lyrics_by_id(album_id)
+
+    # Return chart_data as a tuple for most common words in album
+    # Index 0 is data labels for 15 most common words
+    # Index 1 is number of occurences for each word
     chart_data = markov.most_common(lyrics)
 
     return render_template('album_details.html', album=album,
@@ -68,7 +78,10 @@ def show_album_details(album_id):
 def create_snippet(album_id):
     """Create and display Markov song snippet from album lyrics."""
 
+    # Return album by album_id in db
     album = crud.get_album_by_id(album_id)
+
+    # Return album title by album_id in db
     title = crud.get_album_title_by_id(album_id)
 
     # User selection from drop-down menu for Taylor Swift album
@@ -113,17 +126,30 @@ def create_snippet(album_id):
     return render_template('snippet.html', title=title, snippet=snippet, album=album)
 
 @app.route('/albums/<album_id>/snippet/save')
+@login_required
 def save_snippet(album_id):
     """Save song snippet to database."""
 
+    # Return album by album_id in db
     album = crud.get_album_by_id(album_id)
+
+    # Store generated snippet in sessions
     snippet = session['snippet']
 
-
+    # If current user is logged in
     if current_user.is_authenticated:
+
+        # Save snippet to db under current user
         db_snippet = crud.create_snippet(snippet, crud.get_user_by_id(current_user.get_id()))
+
+        # Save secondary object snippet_album to db under album
         snippet_album = crud.create_snippet_album(db_snippet, album)
+
+        # Notify user that snippet was saved
         flash('Snippet saved!')
+
+    # Otherwise if user not logged in, notify that they must log in to save
+    # This is a safeguard, since button only appears to logged in users
     else:
         flash('Log in to save your snippet!')
 
@@ -160,26 +186,32 @@ def add_user_upload_to_db():
                     lyrics,
                     crud.get_artist_by_name(artist),
                     user_id)
+
+    # Notify user that album was saved
     flash("Album saved!")
 
     return redirect('/albums')
 
-@app.route('/all-users')
-def show_all_users():
-    """View all users."""
+# REMOVED THIS ROUTE FOR SECURITY PURPOSES
+# @app.route('/all-users')
+# def show_all_users():
+#     """View all users."""
 
-    users = crud.return_all_users()
+#     # Return all users in db
+#     users = crud.return_all_users()
 
-    return render_template('all_users.html', users=users)
+#     return render_template('all_users.html', users=users)
 
-@app.route('/all-users/<user_id>')
+@app.route('/user/<user_id>')
 def user_details(user_id):
     """Show user detail page with favorite song snippets."""
 
+    # Return user by user_id from db
     user = crud.get_user_by_id(user_id)
+
+    # Return snippets saved by user by album from db
     user_dict = crud.get_user_album_snippet()
 
-    # user_dict contains Snippet_Album items
     # If user has not saved any snippets yet, user will not be in user_dict
     # Try checking if user is in user_dict
     try:
@@ -201,10 +233,12 @@ def user_details(user_id):
 def register_user():
     """Get inputs from create account form."""
 
+    # Return inputs from create account form
     email = request.form.get('email')
     hashed_password = generate_password_hash(request.form.get('password'), method="sha256")
+
+    # Return user by email in db
     user = crud.get_user_by_email(email)
-    print(user)
 
     # Check that user entered values for email and password
     if email != "" and hashed_password != "":
@@ -232,18 +266,22 @@ def load_user(user_id):
 
     return crud.get_user_by_id(user_id)
 
-# Flask snippet to check for a safe URL
 def is_safe_url(target):
+    """Flask snippet to check for a safe URL."""
+
     ref_url = urlparse(request.host_url)
     test_url = urlparse(urljoin(request.host_url, target))
+
     return test_url.scheme in ('http', 'https') and ref_url.netloc == test_url.netloc
 
 @app.route('/login', methods = ['POST'])
 def log_in():
     """Log a user in."""
 
+    # Return email entered in login form
     email = request.form.get('email')
-    # hashed_password = request.form.get('password')
+
+    # Return user by email in db
     user = crud.get_user_by_email(email)
 
     # Check if user exists in db

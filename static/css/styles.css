@@ -12,6 +12,14 @@
     background-size: cover;
     } */
 
+.heading-vertical-center {
+    min-height: 75%;
+    min-height: 75vh;
+
+    display: flex;
+    align-items: center;
+    }
+
 img {
     height: 250px;
     width: 250px;

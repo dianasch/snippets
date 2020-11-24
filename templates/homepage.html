@@ -8,7 +8,6 @@
     <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
 <header class="masthead mb-auto">
     <div class="inner">
-        <!-- <h3 class="masthead-brand">Snippets</h3> -->
         <nav class="navbar navbar-custom navbar-expand-lg navbar-light">
             <a class="navbar-brand" href="/">Snippets</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,52 +37,44 @@
             </div>
             {% endif %}
         </nav>
-        <!-- <nav>
-            <ul class="nav masthead-nav">
-            <li class="active"><a href="/">Home</a></li><br>
-            <li><a href="/albums">All Albums</a></li><br>
-            {% if current_user.is_authenticated %}
-            <li><a href="/user/{{current_user.get_id()}}" id="view-snippets">User Profile</a></li><br>
-            <li>
-                <form action='/logout' id="logout" method="POST">
-                <button type="submit">Log out</button>
-                </form>
-            </li>
-            {% endif %}
-            </ul>
-        </nav> -->
     </div>
 </header>
 
 <main role="main" class="inner cover">
+    <br>
+    <br>
     <h1 class="cover-heading">Let's make an original Taylor Swift song snippet!</h1>
-    {% if not current_user.is_authenticated %}
-
+    {% if current_user.is_authenticated %}
     <p class="lead">
-        <button type="button" id="show-create-account">Create An Account</button>
+        <a href="/albums" class="btn btn-lg btn-secondary">Get Started</a>
+    </p>
+    {% else %}
+    <br>
+    <p class="lead">
+        <button type="button" id="show-create-account" class="btn btn-lg btn-secondary">Create An Account</button>
         <form action="/users" id="create-account" method="POST">
             <label><h3>Create An Account</h3></label>
             <p>
                 Email <input type="text" name="email"><br><br>
                 Password <input type="password" name="password"><br><br>
-                <input type="submit">
+                <input type="submit" class="btn btn-secondary">
             </p>
         </form>
     </p>
+    <br>
     <p class="lead">
-        <button type="button" id="show-login">Log In</button>
+        <button type="button" id="show-login" class="btn btn-lg btn-secondary">Log In</button>
         <form action="/login" id="login" method="POST">
             <label><h3>Log In</h3></label>
             <p>Email <input type="text" name="email"></p>
             <p>Password <input type="password" name="password"></p>
-            <input type="submit">
+            <input type="submit" class="btn btn-secondary">
         </form>
     </p>
     {% endif %}
 </main>
 </div>
 </body>
-</div>
 
 
 

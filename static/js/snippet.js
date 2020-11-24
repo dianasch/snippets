@@ -55,6 +55,7 @@ $(document).ready(function() {
             'thumbnail': $('input[name="thumbnail"]').val()
         }
 
+        // Array of possible image extensions
         const extensions = [".bmp", ".jpg", ".jpeg", ".jfif", ".pjpeg", ".pjp", ".png", ".tif", ".tiff", ".ico", ".cur"];
 
         const thumbnailURL = requestArgs['thumbnail'];
@@ -63,8 +64,12 @@ $(document).ready(function() {
         type: "HEAD",
         url : requestArgs['thumbnail'],
         success: function(message,text,response){
+            // Check if MIME content from header contains string `image`
+            // If indexOf returns -1, URL is not an image path
             if (response.getResponseHeader('Content-Type').indexOf("image") === -1){
 
+                // Safeguard measure if MIME content isn't correct
+                // Check if any of the image extensions appear in thumbnail URL
                 for (const extension of extensions) {
                     if (thumbnailURL.indexOf(extension) !== -1) {
                         alert("Oops! Not a valid image! Please submit a valid link for your album thumbnail.");

@@ -256,7 +256,7 @@ def register_user():
     
     # Notify user that they must enter values for email and password
     else:
-        flash('Please enter an email and a password.')
+        flash('Please enter an email and a password.', 'danger')
 
     return redirect('/')
 

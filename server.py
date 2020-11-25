@@ -248,11 +248,11 @@ def register_user():
 
             # Create new user
             crud.create_user(email, hashed_password)
-            flash('Account created! You can now log in.')
+            flash('Account created! You can now log in.', 'success')
         
         # Otherwise, notify user that email already in db
         else:    
-            flash('There is already an account associated with this email.')
+            flash('There is already an account associated with this email.', 'warning')
     
     # Notify user that they must enter values for email and password
     else:
@@ -292,7 +292,7 @@ def log_in():
 
             # If so, login user
             login_user(user)
-            flash('Logged in!')
+            flash('Logged in!', 'success')
 
             # Check if next URL is safe
             next = request.args.get('next')

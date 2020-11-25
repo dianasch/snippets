@@ -30,7 +30,7 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active">
                         <form action='/logout' id="logout" method="POST">
-                        <button type="submit">Log out</button>
+                        <button type="submit" class="btn btn-secondary">Log out</button>
                         </form>
                     </li>
                 </ul>
@@ -45,32 +45,40 @@
     <br>
     <h1 class="cover-heading">Let's make an original Taylor Swift song snippet!</h1>
     {% if current_user.is_authenticated %}
+    <br>
     <p class="lead">
         <a href="/albums" class="btn btn-lg btn-secondary">Get Started</a>
     </p>
     {% else %}
     <br>
-    <p class="lead">
-        <button type="button" id="show-create-account" class="btn btn-lg btn-secondary">Create An Account</button>
-        <form action="/users" id="create-account" method="POST">
-            <label><h3>Create An Account</h3></label>
-            <p>
-                Email <input type="text" name="email"><br><br>
-                Password <input type="password" name="password"><br><br>
-                <input type="submit" class="btn btn-secondary">
-            </p>
-        </form>
-    </p>
-    <br>
-    <p class="lead">
+    <div class="button-box col-lg-12">
+        <button type="button" id="show-create-account" class="btn btn-lg btn-secondary" style="margin-right:10px;">Create An Account</button>
+            <form action="/users" id="create-account" method="POST">
+                <br>
+                <div style="text-align: center;">
+                    <div style="display: inline-block; text-align: left;">
+                        <label><h3>Create An Account</h3></label>
+                        <p>
+                            Email: <input type="text" name="email"><br><br>
+                            Password: <input type="password" name="password"><br><br>
+                            <input type="submit" class="btn btn-secondary">
+                        </p>
+                    </div>
+                </div>
+            </form>
         <button type="button" id="show-login" class="btn btn-lg btn-secondary">Log In</button>
-        <form action="/login" id="login" method="POST">
-            <label><h3>Log In</h3></label>
-            <p>Email <input type="text" name="email"></p>
-            <p>Password <input type="password" name="password"></p>
-            <input type="submit" class="btn btn-secondary">
-        </form>
-    </p>
+            <form action="/login" id="login" method="POST">
+                <br>
+                <div style="text-align: center;">
+                    <div style="display: inline-block; text-align: left;">
+                        <label><h3>Log In</h3></label>
+                        <p>Email: <input type="text" name="email"></p>
+                        <p>Password: <input type="password" name="password"></p>
+                        <input type="submit" class="btn btn-secondary">
+                    </div>
+                </div>
+            </form>
+    </div>
     {% endif %}
 </main>
 </div>

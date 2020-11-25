@@ -30,6 +30,12 @@ $(document).ready(function() {
     $('#show-create-account').on({
         click: function(){
             $('#create-account').toggle();
+            if ($('#show-login').is(":visible")) {
+                $('#show-login').hide();
+            }
+            else {
+                $('#show-login').show();
+            }
         }
     });
 
@@ -42,6 +48,12 @@ $(document).ready(function() {
     $('#show-login').on({
         click: function(){
             $('#login').toggle();
+            if ($('#show-create-account').is(":visible")) {
+                $('#show-create-account').hide();
+            }
+            else {
+                $('#show-create-account').show();
+            }
         }
     });
 

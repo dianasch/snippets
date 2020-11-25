@@ -304,11 +304,11 @@ def log_in():
 
         # If passwords do not match, notify user
         else:
-            flash('Email and password do not match.')
+            flash('Email and password do not match.', 'danger')
     
     # If user does not exist in db, notify user
     else:
-        flash('There is no account associated with this email. Please create an account!')
+        flash('There is no account associated with this email. Please create an account!', 'warning')
 
     return redirect('/')
 

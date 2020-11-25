@@ -134,7 +134,7 @@ def save_snippet(album_id):
     album = crud.get_album_by_id(album_id)
 
     # Store generated snippet in sessions
-    snippet = session['snippet']
+    snippet = session["snippet"]
 
     # If current user is logged in
     if current_user.is_authenticated:
@@ -146,12 +146,12 @@ def save_snippet(album_id):
         snippet_album = crud.create_snippet_album(db_snippet, album)
 
         # Notify user that snippet was saved
-        flash('Snippet saved!')
+        flash("Snippet saved!", "success")
 
     # Otherwise if user not logged in, notify that they must log in to save
     # This is a safeguard, since button only appears to logged in users
     else:
-        flash('Log in to save your snippet!')
+        flash("Log in to save your snippet!", "warning")
 
     return redirect(f"/user/{current_user.get_id()}")
 
@@ -188,7 +188,7 @@ def add_user_upload_to_db():
                     user_id)
 
     # Notify user that album was saved
-    flash("Album saved!")
+    flash("Album saved!", "success")
 
     return redirect('/albums')
 
@@ -248,15 +248,15 @@ def register_user():
 
             # Create new user
             crud.create_user(email, hashed_password)
-            flash('Account created! You can now log in.', 'success')
+            flash("Account created! You can now log in.", "success")
         
         # Otherwise, notify user that email already in db
         else:    
-            flash('There is already an account associated with this email.', 'warning')
+            flash("There is already an account associated with this email.", "warning")
     
     # Notify user that they must enter values for email and password
     else:
-        flash('Please enter an email and a password.', 'danger')
+        flash("Please enter an email and a password.", "danger")
 
     return redirect('/')
 
@@ -279,7 +279,7 @@ def log_in():
     """Log a user in."""
 
     # Return email entered in login form
-    email = request.form.get('email')
+    email = request.form.get("email")
 
     # Return user by email in db
     user = crud.get_user_by_email(email)
@@ -288,14 +288,14 @@ def log_in():
     if user:
 
         # Check if entered password matches password in db
-        if check_password_hash(user.password, request.form.get('password')):
+        if check_password_hash(user.password, request.form.get("password")):
 
             # If so, login user
             login_user(user)
-            flash('Logged in!', 'success')
+            flash("Logged in!", "success")
 
             # Check if next URL is safe
-            next = request.args.get('next')
+            next = request.args.get("next")
 
             if not is_safe_url(next):
                 return abort(400)
@@ -308,7 +308,7 @@ def log_in():
     
     # If user does not exist in db, notify user
     else:
-        flash('There is no account associated with this email. Please create an account!', 'warning')
+        flash("There is no account associated with this email. Please create an account!", "warning")
 
     return redirect('/')
 
@@ -318,7 +318,7 @@ def log_out():
     """Log a user out."""
 
     logout_user()
-    flash("Logged out!")
+    flash("Logged out!", "success")
 
     return redirect('/')
 

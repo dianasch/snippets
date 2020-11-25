@@ -34,21 +34,40 @@
     {% endif %}
 </nav>
 
-    <h1>All Albums</h1>
+<main role="main">
+
+    <section class="jumbotron text-center">
+        <div class="container">
+        <h1>Albums</h1>
+        <p class="lead text-muted">Select an album to view more details.</p>
+        </div>
+    </section>
+    <div class="container">
     <h2>Choose a Taylor Swift album</h2>
-
-    <div class="link-ts-albums">
-    {% for album in ts_albums %}
-
-        <a href = "/albums/{{album.album_id}}"><img src={{album.thumbnail_path}}></a>
-
-    {% endfor %}
+    </div>
+    <div class="album py-5 bg-light">
+        <div class="container">
+            <div class="row">
+            {% for album in ts_albums %}
+                <div class="col-3">
+                    <div class="card mb-3 shadow-sm">
+                        <a href = "/albums/{{album.album_id}}"><img src={{album.thumbnail_path}}></a>
+                    <div class="card-body">
+                        <p class="card-text">{{album.title}}</p>
+                    </div>
+                    </div>
+                </div>
+            {% endfor %}
+            </div>
+        </div>
     </div>
 
 
     {% if current_user.is_authenticated %}
 
-    <h2>Choose one of your albums</h2>
+    <div class="container">
+        <h2>Choose one of your uploaded albums</h2>
+    </div>
 
         {% if user_albums|length > 0 %}
 

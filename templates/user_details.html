@@ -4,6 +4,11 @@
 
 {% block body %}
 
+<div class="container">
+    <body class="text-center">
+        <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <header class="masthead mb-auto">
+        <div class="inner">
 <nav class="navbar navbar-custom navbar-expand-lg navbar-light">
     <a class="navbar-brand" href="/">Snippets</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,7 +37,10 @@
     </div>
     {% endif %}
 </nav>
+</div>
+</header>
 
+<main role="main" class="inner cover"></main>
 {% if current_user.is_authenticated and current_user == user %}
 
     <h1>Favorite Snippets</h1>
@@ -64,6 +72,7 @@
 {% else %}
 
     <p>Oops! Log in to view your profile!</p>
+    </main>
 
 {% endif %}
 

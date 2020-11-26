@@ -155,12 +155,6 @@ def save_snippet(album_id):
 
     return redirect(f"/user/{current_user.get_id()}")
 
-@app.route('/user-album-form')
-def show_user_upload_form():
-    """Display user form to upload new album."""
-
-    return render_template('user_album_form.html')
-
 @app.route('/user-album-upload', methods = ['POST'])
 def add_user_upload_to_db():
     """Adds new album to db from user input form."""

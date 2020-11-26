@@ -59,12 +59,12 @@
 
         <div class="row featurette">
             <div class="col-md-7">
-            <h3 class="featurette-heading">{{ keys }}</h3>
-            {% for item in values['snippets'] %}
-            <ul>
-            <li>{{ item }}</li>
-            </ul>
-            {% endfor %}
+            <h3 class="featurette-heading" style="text-align: left;">{{ keys }}</h3><br>
+                {% for item in values['snippets'] %}
+                <ul>
+                <li>{{ item }}</li>
+                </ul>
+                {% endfor %}
         </div>
         <div class="col-md-5">
             <img src="{{ values['thumbnail'] }}">

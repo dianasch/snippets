@@ -18,6 +18,11 @@
     margin-top:20px;
 }
 
+.card {
+    width: 100%;
+    width: 252px;
+}
+
 .heading-vertical-center {
     min-height: 75%;
     min-height: 75vh;

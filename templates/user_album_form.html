@@ -3,44 +3,44 @@
 {% block title %}Upload a new album{% endblock %}
 
 {% block body %}
-    <h1>Create a Mash Up</h1>
-    <h3>Upload any album to mash up with a Taylor Swift album for your song snippet.<br>
-        All fields required.</h2>
+<h1>Create a Mash Up</h1>
+<h3>Upload any album to mash up with a Taylor Swift album for your song snippet.<br>
+All fields required.</h2>
 
-    <form action="/user-album-upload" method="POST" id="user-album-upload">
-        <label for="artist">Artist Name:</label><br>
-        <input type="text"
-                name="artist"
-                id="artist"
-                required><br>
-        <label for="title">Album Title:</label><br>
-        <input type="text"
-                name="title"
-                id="title"
-                required><br>
-        <label for="thumbnail">Link to Thumbnail Image:</label><br>
-        <input type="text"
-                name="thumbnail"
-                id="thumbnail"
-                required><br>
-        <label for="description">Album Description:</label><br>
-        <textarea
-                name="description"
-                id="description"
-                rows="5"
-                cols="80"
-                required>
-        </textarea><br>
-        <label for="lyrics">Full Album Lyrics:</label><br>
-        <textarea
-                name="lyrics"
-                id="lyrics"
-                rows="10"
-                cols="80"
-                required>
-        </textarea><br>
-        <input type="submit">
-    </form>
+<form action="/user-album-upload" method="POST" id="user-album-upload">
+<label for="artist">Artist Name:</label><br>
+<input type="text"
+        name="artist"
+        id="artist"
+        required><br>
+<label for="title">Album Title:</label><br>
+<input type="text"
+        name="title"
+        id="title"
+        required><br>
+<label for="thumbnail">Link to Thumbnail Image:</label><br>
+<input type="text"
+        name="thumbnail"
+        id="thumbnail"
+        required><br>
+<label for="description">Album Description:</label><br>
+<textarea
+        name="description"
+        id="description"
+        rows="5"
+        cols="80"
+        required>
+</textarea><br>
+<label for="lyrics">Full Album Lyrics:</label><br>
+<textarea
+        name="lyrics"
+        id="lyrics"
+        rows="10"
+        cols="80"
+        required>
+</textarea><br>
+<input type="submit" class="btn btn-secondary">
+</form>
 
 
 {% endblock %}  

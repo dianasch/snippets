@@ -40,10 +40,15 @@
         <div class="container">
         <h1>Albums</h1>
         <p class="lead text-muted">Select an album to view more details.</p>
+        <p>
+            <a href="#taylor-album" class="btn btn-secondary my-2" style="margin-right:10px;">Taylor Swift Albums</a>
+            <a href="#user-album" class="btn btn-secondary my-2" style="margin-right:10px;">Your Albums</a>
+            <a href="#upload-album" class="btn btn-secondary my-2">Upload Your Own Album</a>
+        </p>
         </div>
     </section>
     <div class="container">
-    <h2>Choose a Taylor Swift album</h2>
+    <h2><a name="taylor-album">Choose a Taylor Swift album</a></h2>
     </div>
     <div class="album py-5 bg-light">
         <div class="container">
@@ -66,7 +71,7 @@
     {% if current_user.is_authenticated %}
 
     <div class="container">
-        <h2>Choose one of your uploaded albums</h2>
+        <h2><a name="user-album">Choose One of Your Uploaded Albums</a></h2>
     </div>
 
     {% if user_albums|length > 0 %}
@@ -75,8 +80,8 @@
                 <div class="row">
                 {% for album in user_albums %}
                     <div class="col-3">
-                        <div class="card mb-3 shadow-sm">
-                            <a href = "/albums/{{album.album_id}}"><img src={{album.thumbnail_path}}></a>
+                        <div class="card mb-3 mx-auto shadow-sm">
+                            <a href="/albums/{{album.album_id}}"><img src={{album.thumbnail_path}}></a>
                         <div class="card-body">
                             <p class="card-text">{{album.title}}</p>
                         </div>
@@ -88,16 +93,23 @@
         </div>
         </div>
 
+    <div class="container">
+        <h2><a name="upload-album">Upload Your Own Album</a></h2>
+    </div>
+    <section class="jumbotron text-center">
     {% else %}
 
         <p>No albums uploaded yet!</p>
 
     {% endif %}
 
-    <button type="button" id="user-album-form">Upload your own album</button>
+    <div class="button-box col-lg-12">
+    <button type="button" id="user-album-form" class="btn btn-lg btn-secondary">Upload your own album</button>
 
-    <div id="show-user-form"></div>
+    <div id="show-user-form" style="display: inline-block; text-align: left;"></div></div>
 
     {% endif %}
+    </section>
+    </div>
 
 {% endblock %}  

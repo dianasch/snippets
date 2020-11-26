@@ -208,6 +208,7 @@ def get_user_album_snippet():
         # Set variable `user_id` for user_id of Snippet_Album object
         user_id = snippet_album.snippet.user_id
 
+        # Set variable `album_id` for album_id of Snippet_Album object
         album_id = snippet_album.album.album_id
 
         # Set variable `album_title` to album title for album_id of 
@@ -232,7 +233,8 @@ def get_user_album_snippet():
             # key as `snippets`,`thumbnail`
             # values as list of snippet_text, thumbnail path
 
-            user_dict[user_id] = {album_title: {"snippets": [snippet_text],
+            user_dict[user_id] = {album_title: {"album_id": album_id,
+                                                "snippets": [snippet_text],
                                                 "thumbnail": album_thumbnail}}
 
         # If user_id is already in dictionary
@@ -254,7 +256,8 @@ def get_user_album_snippet():
                 # dictionary with 
                 # key as `snippets`,`thumbnail`
                 # values as list of snippet_text, thumbnail path
-                user_dict[user_id][album_title] = {"snippets": [snippet_text],
+                user_dict[user_id][album_title] = {"album_id": album_id,
+                                                "snippets": [snippet_text],
                                                 "thumbnail": album_thumbnail}
 
     return user_dict

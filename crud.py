@@ -208,13 +208,15 @@ def get_user_album_snippet():
         # Set variable `user_id` for user_id of Snippet_Album object
         user_id = snippet_album.snippet.user_id
 
+        album_id = snippet_album.album.album_id
+
         # Set variable `album_title` to album title for album_id of 
         # Snippet_Album object
-        album_title = get_album_title_by_id(snippet_album.album_id)
+        album_title = snippet_album.album.title
 
         # Set variable `album_thumbnail` to album thumbnail for album_id of
         # Snippet_Album object
-        album_thumbnail = get_album_thumbnail_by_id(snippet_album.album_id)
+        album_thumbnail = snippet_album.album.thumbnail_path
 
         # Set variable `snippet_text` to snippet text for snippet_id
         # Snippet_Album object

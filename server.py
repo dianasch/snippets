@@ -298,7 +298,7 @@ def log_in():
 
         # If passwords do not match, notify user
         else:
-            flash('Email and password do not match.', 'danger')
+            flash("Email and password do not match.", "danger")
     
     # If user does not exist in db, notify user
     else:

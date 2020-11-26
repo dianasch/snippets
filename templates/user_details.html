@@ -55,16 +55,21 @@
 
         {% for keys, values in snippets.items() %}
 
-        <ul>
-            <li>{{ keys }}</li>
-            <li>{% for item in values['snippets'] %}</li>
-                {{ item }}
-                {% endfor %}
-            <li><img src="{{ values['thumbnail'] }}"</li>
-            <ul>
+        <hr class="featurette-divider">
 
+        <div class="row featurette">
+            <div class="col-md-7">
+            <h3 class="featurette-heading">{{ keys }}</h3>
+            {% for item in values['snippets'] %}
+            <ul>
+            <li>{{ item }}</li>
             </ul>
-        </ul>
+            {% endfor %}
+        </div>
+        <div class="col-md-5">
+            <img src="{{ values['thumbnail'] }}">
+        </div>
+        </div>
 
         {% endfor %}
 

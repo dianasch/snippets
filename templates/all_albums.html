@@ -61,9 +61,9 @@
                 <div class="col-3">
                     <div class="card mb-3 shadow-sm">
                         <a href = "/albums/{{album.album_id}}"><img src={{album.thumbnail_path}}></a>
-                    <div class="card-body">
-                        <p class="card-text">{{album.title}}</p>
-                    </div>
+                        <div class="card-body">
+                            <p class="card-text">{{album.title}}</p>
+                        </div>
                     </div>
                 </div>
             {% endfor %}
@@ -86,9 +86,9 @@
                         <div class="col-3">
                             <div class="card mb-3 mx-auto shadow-sm">
                                 <a href="/albums/{{album.album_id}}"><img src={{album.thumbnail_path}}></a>
-                            <div class="card-body">
-                                <p class="card-text">{{album.title}}</p>
-                            </div>
+                                <div class="card-body">
+                                    <p class="card-text">{{album.title}}</p>
+                                </div>
                             </div>
                         </div>
                     {% endfor %}
@@ -136,7 +136,7 @@
                     <label for="description">Album Description:</label>
                     <textarea name="description" id="description" rows="5" cols="80" class="form-control" placeholder="Enter a brief description of the album details" required></textarea><br>
                     <label for="lyrics">Full Album Lyrics:</label>
-                    <textarea name="lyrics" id="lyrics" rows="10" cols="80" class="form-control" placeholder="Enter full album lyrics" required></textarea><br>
+                    <textarea name="lyrics" id="lyrics" rows="10" cols="80" class="form-control" placeholder="Enter full album lyrics" required></textarea>
                 </div>
                 <input type="submit" class="btn btn-secondary">
                 </form>

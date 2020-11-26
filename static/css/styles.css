@@ -12,6 +12,9 @@
     background-size: cover;
     } */
 
+.album {
+    text-align:center;
+}
 
 .button-box {
     text-align:center;
@@ -21,6 +24,18 @@
 .card {
     width: 100%;
     width: 252px;
+}
+
+.card-columns {
+    @include media-breakpoint-only(lg) {
+    column-count: 3;
+    }
+    @include media-breakpoint-only(lg) {
+    column-count: 4;
+    }
+    @include media-breakpoint-only(xl) {
+    column-count: 4;
+    }
 }
 
 .heading-vertical-center {

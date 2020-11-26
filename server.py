@@ -294,7 +294,7 @@ def log_in():
             if not is_safe_url(next):
                 return abort(400)
 
-            return redirect(next or '/')
+            return redirect(next or '/albums')
 
         # If passwords do not match, notify user
         else:
@@ -304,7 +304,7 @@ def log_in():
     else:
         flash("There is no account associated with this email. Please create an account!", "warning")
 
-    return redirect('/')
+    return redirect('/albums')
 
 @app.route('/logout', methods = ['POST'])
 @login_required

@@ -43,7 +43,9 @@
         <p>
             {% if current_user.is_authenticated %}
             <a href="#taylor-album" class="btn btn-secondary my-2" style="margin-right:10px;">Taylor Swift Albums</a>
-            <a href="#user-album" class="btn btn-secondary my-2" style="margin-right:10px;">Your Albums</a>
+                {% if user_albums|length > 0 %}
+                <a href="#user-album" class="btn btn-secondary my-2" style="margin-right:10px;">Your Albums</a>
+                {% endif %}
             <a href="#upload-album" class="btn btn-secondary my-2">Upload Your Own Album</a>
             {% endif %}
         </p>
@@ -72,41 +74,31 @@
 
     {% if current_user.is_authenticated %}
 
-    <div class="container">
-        <h2><a name="user-album">Choose One of Your Uploaded Albums</a></h2>
-    </div>
-
         {% if user_albums|length > 0 %}
-        <div class="album py-5 bg-light">
-            <div class="container">
-                <div class="row">
-                {% for album in user_albums %}
-                    <div class="col-3">
-                        <div class="card mb-3 mx-auto shadow-sm">
-                            <a href="/albums/{{album.album_id}}"><img src={{album.thumbnail_path}}></a>
-                        <div class="card-body">
-                            <p class="card-text">{{album.title}}</p>
-                        </div>
-                        </div>
-                    </div>
-                {% endfor %}
-                </div>
-            </div>
-        </div>
 
-        {% else %}
-        <div class="album py-5 bg-light">
-            <div class="container">
-                <div class="row">
-                    <div class="col-3">
-                        <p>No albums uploaded yet!</p>
+        <div class="container" style="margin-top:33px; margin-bottom: 10px;">
+            <h2><a name="user-album">Choose One of Your Uploaded Albums</a></h2>
+        </div>
+            <div class="album py-5 bg-light">
+                <div class="container">
+                    <div class="row">
+                    {% for album in user_albums %}
+                        <div class="col-3">
+                            <div class="card mb-3 mx-auto shadow-sm">
+                                <a href="/albums/{{album.album_id}}"><img src={{album.thumbnail_path}}></a>
+                            <div class="card-body">
+                                <p class="card-text">{{album.title}}</p>
+                            </div>
+                            </div>
+                        </div>
+                    {% endfor %}
                     </div>
                 </div>
             </div>
-        </div>
+
         {% endif %}
     
-    <div class="container">
+    <div class="container" style="margin-top:33px; margin-bottom: 10px;">
         <h2><a name="upload-album">Upload Your Own Album</a></h2>
     </div>
 

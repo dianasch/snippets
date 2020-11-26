@@ -9,7 +9,7 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarText">
+    <div class="collapse navbar-collapse justify-content-end container-fluid" id="navbarText">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
                 <a class="nav-link" href="/albums">All Albums</a>
@@ -69,21 +69,30 @@
         <h2>Choose one of your uploaded albums</h2>
     </div>
 
-        {% if user_albums|length > 0 %}
-
-            <div class="link-user-albums">
+    {% if user_albums|length > 0 %}
+        <div class="album py-5 bg-light">
+            <div class="container">
+                <div class="row">
                 {% for album in user_albums %}
-            
-                    <a href = "/albums/{{album.album_id}}"><img src={{album.thumbnail_path}}></a>
-            
-            {% endfor %}
+                    <div class="col-3">
+                        <div class="card mb-3 shadow-sm">
+                            <a href = "/albums/{{album.album_id}}"><img src={{album.thumbnail_path}}></a>
+                        <div class="card-body">
+                            <p class="card-text">{{album.title}}</p>
+                        </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                </div>
             </div>
+        </div>
+        </div>
 
-        {% else %}
+    {% else %}
 
-            <p>No albums uploaded yet!</p>
+        <p>No albums uploaded yet!</p>
 
-        {% endif %}
+    {% endif %}
 
     <button type="button" id="user-album-form">Upload your own album</button>
 

@@ -3,6 +3,7 @@
 
 
 $(document).ready(function() {
+
     $('#user-album-form').click(function(evt) {
         console.log(evt);
         evt.preventDefault();
@@ -17,10 +18,31 @@ $(document).ready(function() {
 
             success: (res) => {
                 $('#show-user-form').html(res);
+                if ($('#show-user-form').is(":visible")) {
+                    $('#show-user-form').hide();
+                }
+                else {
+                    $('#show-user-form').show();
+                }
             }
         });
 
     });
+});
+
+$(document).ready(function() {
+
+    $('#user-album-form').on({
+        click: function(){
+            if ($('#show-user-form').is(":visible")) {
+                $('#show-user-form').hide();
+            }
+            else {
+                $('#show-user-form').show();
+            }
+        }
+    });
+
 });
 
 $(document).ready(function() {

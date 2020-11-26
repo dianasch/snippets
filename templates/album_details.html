@@ -4,12 +4,17 @@
 
 {% block body %}
 
+<div class="container">
+    <body class="text-center">
+        <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <header class="masthead mb-auto">
+        <div class="inner">
 <nav class="navbar navbar-custom navbar-expand-lg navbar-light">
     <a class="navbar-brand" href="/">Snippets</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse justify-content-end container-fluid"" id="navbarText">
+    <div class="collapse navbar-collapse justify-content-end container-fluid" id="navbarText">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
                 <a class="nav-link" href="/albums">All Albums</a>
@@ -27,20 +32,28 @@
             <li class="nav-item active">
                 <form action='/logout' id="logout" method="POST">
                 <button type="submit" class="btn btn-secondary">Log out</button>
-                </form>
             </li>
         </ul>
     </div>
     {% endif %}
 </nav>
+</div>
+</header>
 
-<h1>{{ album.title }}</h1>
-
-<img src="{{ album.thumbnail_path }}">
-
-<p>
-    {{ album.details }}
-</p>
+<main role="main" class="inner cover">
+<section class="jumbotron text-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-sm-12">
+                <h1>{{ album.title }}</h1><br>
+                <p style="text-align: left;">{{ album.details }}</p>
+            </div>
+            <div class="col-md-4">
+                <img class="img-responsive" src="{{ album.thumbnail_path }}">
+            </div>
+        </div>
+    </div>
+</section>
 
 {% if songs %}
 
@@ -163,5 +176,6 @@ myChart = new Chart(ctx, {
 });
 </script>
 
+</main>
 
 {% endblock %}

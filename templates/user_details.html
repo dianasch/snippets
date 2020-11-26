@@ -40,10 +40,16 @@
 </div>
 </header>
 
-<main role="main" class="inner cover"></main>
-{% if current_user.is_authenticated and current_user == user %}
+<main role="main" class="inner cover">
 
-    <h1>Favorite Snippets</h1>
+    <section class="jumbotron text-center">
+        <div class="container">
+            <h1>Favorite Snippets</h1>
+            <p class="lead text-muted">Your favorite original song snippets organized by album.</p>
+        </div>
+    </section>
+
+{% if current_user.is_authenticated and current_user == user %}
 
     {% if snippets|length > 0 %}
 
@@ -51,12 +57,15 @@
 
         <ul>
             <li>{{ keys }}</li>
+            <li>{% for item in values['snippets'] %}</li>
+                {{ item }}
+                {% endfor %}
+            <li><img src="{{ values['thumbnail'] }}"</li>
             <ul>
-            {% for value in values %}
-            <li>{{ value }}</li>
-            {% endfor %}
+
             </ul>
         </ul>
+
         {% endfor %}
 
     {% else %}
@@ -72,7 +81,7 @@
 {% else %}
 
     <p>Oops! Log in to view your profile!</p>
-    </main>
+</main>
 
 {% endif %}
 

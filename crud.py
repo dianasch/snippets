@@ -56,6 +56,12 @@ def get_artist_by_id(artist_id):
 
     return Artist.query.get(artist_id)
 
+def get_artist_name_by_id(artist_id):
+
+    artist = get_artist_by_id(artist_id)
+
+    return artist.name
+
 def get_artist_by_name(name):
     """Get artist by name."""
 

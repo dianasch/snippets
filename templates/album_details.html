@@ -21,7 +21,7 @@
             </li>
             {% if current_user.is_authenticated %}
             <li class="nav-item active">
-                <a class="nav-link" href="/user/{{current_user.get_id()}}">User Profile</a>
+                <a class="nav-link" href="/user/{{current_user.get_id()}}">Favorite Snippets</a>
             </li>
             {% endif %}
         </ul>
@@ -31,7 +31,7 @@
         <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
                 <form action='/logout' id="logout" method="POST">
-                <button type="submit" class="btn btn-secondary">Log out</button>
+                <button type="submit" class="btn btn-outline-info">Log out</button>
                 </form>
             </li>
         </ul>
@@ -60,7 +60,8 @@
     <div class="col-5">
         <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
             <div class="my-3 p-3">
-            <h3 class="display-5">Let's make a snippet.</h3>
+            <h4><i class="fa fa-scissors" aria-hidden="true"></i></h4>
+            <h4 class="display-5">Let's make a snippet.</h4>
             <p class="text-muted">We utilize Markov chains to analyze full album lyrics and generate random lyrics based on the probability of the next word occurrence.</p>
             </div>
             <div class="dropdown">
@@ -79,11 +80,11 @@
                         <option value="8">folklore</option>
                         <option value="9">Choose a random Taylor Swift album</option>
                     </select>
-                    <br><button type="submit" class="btn btn-secondary">Create snippet</button>
+                    <br><button type="submit" class="btn btn-outline-info">Create snippet</button>
                 </form>
                 {% else %}
                 <form action='/albums/{{album.album_id}}/snippet' id="create-ts-snippet">
-                    <button type="submit" class="btn btn-secondary">Create snippet</button>
+                    <button type="submit" class="btn btn-outline-info">Create snippet</button>
                 </form>
                 {% endif %}
                 <br><p class="text-muted" id="display-snippet"></p>
@@ -94,7 +95,8 @@
     <div class="col-7">
         <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
             <div class="my-3 py-3">
-                <h3 class="display-5">What does {{ artist }} sing about?</h3>
+                <h4><i class="fa fa-bar-chart" aria-hidden="true"></i></h4>
+                <h4 class="display-5">What does {{ artist }} sing about?</h4>
                 <p class="text-muted">"{{ chart_data[0][0] }}" and "{{ chart_data[0][1] }}" sure are popular with {{ artist }}.</p>
             </div>
             <div class="bg-light shadow-sm mx-auto" style="width: 100%; height: 300px; border-radius: 21px 21px 0 0;">

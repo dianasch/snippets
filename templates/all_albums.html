@@ -21,7 +21,7 @@
             </li>
             {% if current_user.is_authenticated %}
             <li class="nav-item active">
-                <a class="nav-link" href="/user/{{current_user.get_id()}}">User Profile</a>
+                <a class="nav-link" href="/user/{{current_user.get_id()}}">Favorite Snippets</a>
             </li>
             {% endif %}
         </ul>
@@ -31,7 +31,7 @@
         <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
                 <form action='/logout' id="logout" method="POST">
-                <button type="submit" class="btn btn-secondary">Log out</button>
+                <button type="submit" class="btn btn-outline-info">Log out</button>
                 </form>
             </li>
         </ul>
@@ -46,14 +46,15 @@
     <section class="jumbotron text-center">
         <div class="container">
         <h1>Albums</h1>
-        <p class="lead text-muted">Select an album to view more details and create your song snippet.</p>
+        <p class="lead text-muted"><i class="fa fa-music" aria-hidden="true"></i><br>
+        Select an album to view more details and create your song snippet.</p>
         <p>
             {% if current_user.is_authenticated %}
-            <a href="#taylor-album" class="btn btn-secondary my-2" style="margin-right:10px;">Taylor Swift Albums</a>
+            <a href="#taylor-album" class="btn btn-lg btn-outline-info" style="margin-right:10px;">Taylor Swift Albums</a>
                 {% if user_albums|length > 0 %}
-                <a href="#user-album" class="btn btn-secondary my-2" style="margin-right:10px;">Your Albums</a>
+                <a href="#user-album" class="btn btn-lg btn-outline-info" style="margin-right:10px;">Your Albums</a>
                 {% endif %}
-            <a href="#upload-album" class="btn btn-secondary my-2">Upload Your Own Album</a>
+            <a href="#upload-album" class="btn btn-lg btn-outline-info">Upload Your Own Album</a>
             {% endif %}
         </p>
         </div>
@@ -113,7 +114,7 @@
         <div class="container">
             <div id="show-user-form" style="display: inline-block; text-align: left;">
                 <h3>Create a Mash Up</h3><br>
-                <p>Upload any album to mash up with a Taylor Swift album for your song snippet.<br>
+                <p>Upload an album to create a mash-up with a Taylor Swift album for your song snippet.<br>
                 <strong>All fields required.</strong></p>
                 
                 <form action="/user-album-upload" method="POST" id="user-album-upload">

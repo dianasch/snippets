@@ -20,7 +20,7 @@
                     </li>
                     {% if current_user.is_authenticated %}
                     <li class="nav-item active">
-                        <a class="nav-link" href="/user/{{current_user.get_id()}}">User Profile<span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="/user/{{current_user.get_id()}}">Favorite Snippets<span class="sr-only">(current)</span></a>
                     </li>
                     {% endif %}
                 </ul>
@@ -30,7 +30,7 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active">
                         <form action='/logout' id="logout" method="POST">
-                        <button type="submit" class="btn btn-secondary">Log out</button>
+                        <button type="submit" class="btn btn-outline-info">Log out</button>
                         </form>
                     </li>
                 </ul>
@@ -44,8 +44,13 @@
     <section class="jumbotron text-center">
     <br>
     <br>
-    <h1 class="cover-heading">Let's make an original Taylor Swift song snippet!</h1><br>
-    <p class="lead text-muted">Snippets utilizes Markov chains to generate random snippets from full album lyrics.</p>
+    <h1 class="cover-heading">Let's make an original Taylor Swift song snippet!</h1>
+    <p class="lead text-muted"><i class="fa fa-scissors" aria-hidden="true"></i><br>
+    Snippets utilizes Markov chains to generate random snippets from full album lyrics.<br>
+    {% if not current_user.is_authenticated %}
+    Test it out by choosing a Taylor Swift album and creating your own original snippet!
+    {% endif %}
+    </p>
     
     {% if not current_user.is_authenticated %}
     <p class="lead text-muted">Log in to save your favorite snippets and upload your own album lyrics.</p>
@@ -53,11 +58,11 @@
 
     {% if current_user.is_authenticated %}
     <p class="lead">
-        <a href="/albums" class="btn btn-lg btn-secondary">Get Started</a>
+        <a href="/albums" class="btn btn-lg btn-outline-info">Get Started</a>
     </p>
     {% else %}
     <div class="button-box col-lg-12">
-        <button type="button" id="show-create-account" class="btn btn-lg btn-secondary" style="margin-right:10px;">Create an Account</button>
+        <button type="button" id="show-create-account" class="btn btn-lg btn-outline-info" style="margin-right:10px;">Create an Account</button>
             <form action="/users" id="create-account" method="POST">
                 <br>
                 <div class="form-group">
@@ -66,12 +71,12 @@
                             <label><h5>Create an Account</h5></label>
                             <p>Email: <input type="text" name="email" class="form-control" placeholder="name@example.com"></p>
                             <p>Password: <input type="password" name="password" class="form-control" placeholder="password"></p>
-                            <input type="submit" class="btn btn-secondary">
+                            <input type="submit" class="btn btn-info">
                         </div>
                     </div>
                 </div>
             </form>
-        <button type="button" id="show-login" class="btn btn-lg btn-secondary" style="margin-right:10px;">Log In</button>
+        <button type="button" id="show-login" class="btn btn-lg btn-outline-info" style="margin-right:10px;">Log In</button>
             <form action="/login" id="login" method="POST">
                 <br>
                 <div class="form-group">
@@ -80,12 +85,12 @@
                             <label><h5>Log In</h5></label>
                             <p>Email: <input type="text" name="email" class="form-control" placeholder="name@example.com"></p>
                             <p>Password: <input type="password" name="password" class="form-control" placeholder="password"></p>
-                            <input type="submit" class="btn btn-secondary">
+                            <input type="submit" class="btn btn-info">
                         </div>
                     </div>
                 </div>
             </form>
-        <a href="/albums" class="btn btn-lg btn-secondary" id="test-it-out">Test It Out</a>
+        <a href="/albums" class="btn btn-lg btn-outline-info" id="test-it-out">Test It Out</a>
     </div>
     {% endif %}
     </section>

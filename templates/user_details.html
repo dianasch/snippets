@@ -21,7 +21,7 @@
             </li>
             {% if current_user.is_authenticated %}
             <li class="nav-item active">
-                <a class="nav-link" href="/user/{{current_user.get_id()}}">User Profile</a>
+                <a class="nav-link" href="/user/{{current_user.get_id()}}">Favorite Snippets</a>
             </li>
             {% endif %}
         </ul>
@@ -31,7 +31,7 @@
         <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
                 <form action='/logout' id="logout" method="POST">
-                <button type="submit" class="btn btn-secondary">Log out</button>
+                <button type="submit" class="btn btn-outline-info">Log out</button>
                 </form>
             </li>
         </ul>
@@ -46,7 +46,8 @@
     <section class="jumbotron text-center">
         <div class="container">
             <h1>Favorite Snippets</h1>
-            <p class="lead text-muted">Your favorite original song snippets organized by album.</p>
+            <p class="lead text-muted"><i class="fa fa-gratipay" aria-hidden="true"></i><br>
+            Your favorite original song snippets organized by album.</p>
         </div>
     </section>
 

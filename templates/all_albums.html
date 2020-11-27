@@ -31,7 +31,7 @@
             <div class="row">
             {% for album in ts_albums %}
                 <div class="col-3">
-                    <div class="card mb-3 shadow-sm">
+                    <div class="card mb-3 shadow-sm" style="width: 15rem;">
                         <a href = "/albums/{{album.album_id}}"><img src={{album.thumbnail_path}}></a>
                         <div class="card-body">
                             <p class="card-text">{{album.title}}</p>
@@ -115,7 +115,6 @@
     </div>
 
     {% endif %}
-    </section>
-    </div>
+</main>
 
 {% endblock %}  

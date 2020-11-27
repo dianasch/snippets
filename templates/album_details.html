@@ -50,7 +50,7 @@
             </div>
             <div class="col-md-8 col-sm-12">
                 <h1>{{ album.title }}</h1><br>
-                <p style="text-align: left;">{{ album.details }}</p>
+                <p class="text-muted" style="text-align: left;">{{ album.details }}</p>
             </div>
         </div>
     </div>
@@ -61,13 +61,13 @@
         <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
             <div class="my-3 p-3">
             <h3 class="display-5">Let's make a snippet.</h3>
-            <p>We utilize Markov chains to analyze full album lyrics and generate random lyrics based on the probability of the next word occurrence.</p>
+            <p class="text-muted">We utilize Markov chains to analyze full album lyrics and generate random lyrics based on the probability of the next word occurrence.</p>
             </div>
-            <div>
+            <div class="dropdown">
                 {% if album_id | int > 8 %}
                 <form action='/albums/{{album.album_id}}/snippet' id ="create-snippet">
-                    <label for="taylor-swift-album">Choose a Taylor Swift Album for a mash-up:</label><br>
-                    <select name="taylor-swift-album" required>
+                    <label for="taylor-swift-album" class="text-muted">Choose a Taylor Swift Album for a mash-up:</label><br>
+                    <select class="form-control" name="taylor-swift-album" required>
                         <option disabled selected value> -- Select an option -- </option>
                         <option value="1">Taylor Swift</option>
                         <option value="2">Fearless</option>
@@ -79,14 +79,14 @@
                         <option value="8">folklore</option>
                         <option value="9">Choose a random Taylor Swift album</option>
                     </select>
-                    <br><br><button type="submit" class="btn btn-secondary">Create snippet</button>
+                    <br><button type="submit" class="btn btn-secondary">Create snippet</button>
                 </form>
                 {% else %}
                 <form action='/albums/{{album.album_id}}/snippet' id="create-ts-snippet">
                     <button type="submit" class="btn btn-secondary">Create snippet</button>
                 </form>
                 {% endif %}
-                <br><p id="display-snippet"></p>
+                <br><p class="text-muted" id="display-snippet"></p>
             </div>
         </div>
     </div>
@@ -95,14 +95,13 @@
         <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
             <div class="my-3 py-3">
                 <h3 class="display-5">What does {{ artist }} sing about?</h3>
-                <p>"{{ chart_data[0][0] }}" and "{{ chart_data[0][1] }}" sure are popular with {{ artist }}.</p>
-
+                <p class="text-muted">"{{ chart_data[0][0] }}" and "{{ chart_data[0][1] }}" sure are popular with {{ artist }}.</p>
             </div>
             <div class="bg-light shadow-sm mx-auto" style="width: 100%; height: 300px; border-radius: 21px 21px 0 0;">
                 <div class="chart-container" style="position: relative; height:35vh; width:35vw">
                     <canvas id="albumChart"></canvas>
                 </div>
-                <br><p><sub>Certain stop words have been omitted from chart data (e.g. 'the,' 'and,' 'a,' etc.).</sub></p>
+                <br><p class="text-muted"><sub>Certain stop words have been omitted from chart data (e.g. 'the,' 'and,' 'a,' etc.).</sub></p>
             </div>
         </div>
     </div>

@@ -60,63 +60,53 @@
     <div class="col-5">
         <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
             <div class="my-3 p-3">
-            <h2 class="display-5">Another headline</h2>
-            <p class="lead">And an even wittier subheading.</p>
+            <h3 class="display-5">Let's make a snippet.</h3>
+            <p>We utilize Markov chains to analyze full album lyrics and generate random lyrics based on the probability of the next word occurrence.</p>
             </div>
             <div>
-            {% if album_id | int > 8 %}
-<form action='/albums/{{album.album_id}}/snippet' id ="create-snippet">
-    <label for="taylor-swift-album">Choose a Taylor Swift Album for your mash-up:</label><br>
-    <select name="taylor-swift-album" required>
-        <option disabled selected value> -- Select an option -- </option>
-        <option value="1">Taylor Swift</option>
-        <option value="2">Fearless</option>
-        <option value="3">Red</option>
-        <option value="4">Speak Now</option>
-        <option value="5">1989</option>
-        <option value="6">reputation</option>
-        <option value="7">Lover</option>
-        <option value="8">folklore</option>
-        <option value="9">Choose a random Taylor Swift album</option>
-    </select><br>
-    <button type="submit" class="btn btn-secondary">Create snippet</button>
-</form>
-
-{% else %}
-
-<form action='/albums/{{album.album_id}}/snippet' id="create-ts-snippet">
-<button type="submit" class="btn btn-secondary">Create snippet</button>
-</form>
-
-{% endif %}
-
-<br><p id="display-snippet"></p>
-
-
-            
+                {% if album_id | int > 8 %}
+                <form action='/albums/{{album.album_id}}/snippet' id ="create-snippet">
+                    <label for="taylor-swift-album">Choose a Taylor Swift Album for a mash-up:</label><br>
+                    <select name="taylor-swift-album" required>
+                        <option disabled selected value> -- Select an option -- </option>
+                        <option value="1">Taylor Swift</option>
+                        <option value="2">Fearless</option>
+                        <option value="3">Red</option>
+                        <option value="4">Speak Now</option>
+                        <option value="5">1989</option>
+                        <option value="6">reputation</option>
+                        <option value="7">Lover</option>
+                        <option value="8">folklore</option>
+                        <option value="9">Choose a random Taylor Swift album</option>
+                    </select>
+                    <br><br><button type="submit" class="btn btn-secondary">Create snippet</button>
+                </form>
+                {% else %}
+                <form action='/albums/{{album.album_id}}/snippet' id="create-ts-snippet">
+                    <button type="submit" class="btn btn-secondary">Create snippet</button>
+                </form>
+                {% endif %}
+                <br><p id="display-snippet"></p>
             </div>
         </div>
     </div>
 
     <div class="col-7">
+        <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+            <div class="my-3 py-3">
+                <h3 class="display-5">What does {{ artist }} sing about?</h3>
+                <p>"{{ chart_data[0][0] }}" and "{{ chart_data[0][1] }}" sure are popular with {{ artist }}.</p>
 
-            <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
-                <div class="my-3 py-3">
-                    <h2 class="display-5">Another headline</h2>
-                    <p class="lead">And an even wittier subheading.</p>
-
-                </div>
-                <div class="bg-light shadow-sm mx-auto" style="width: 100%; height: 300px; border-radius: 21px 21px 0 0;">
-                    <div class="chart-container" style="position: relative; height:35vh; width:35vw">
-                        <canvas id="albumChart"></canvas>
-                    </div>
+            </div>
+            <div class="bg-light shadow-sm mx-auto" style="width: 100%; height: 300px; border-radius: 21px 21px 0 0;">
+                <div class="chart-container" style="position: relative; height:35vh; width:35vw">
+                    <canvas id="albumChart"></canvas>
                 </div>
             </div>
-
+        </div>
     </div>
-    
 </div>
-</div>
+
 
 
 <!--REMOVED FOR AESTHETIC REASONS-->

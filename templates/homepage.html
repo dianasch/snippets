@@ -44,15 +44,18 @@
     <section class="jumbotron text-center">
     <br>
     <br>
-    <h1 class="cover-heading">Let's make an original Taylor Swift song snippet!</h1>
-    <p class="lead">We utilize Markov chains to analyze full album lyrics and generate random lyrics based on the probability of the next word occurrence.</p>
+    <h1 class="cover-heading">Let's make an original Taylor Swift song snippet!</h1><br>
+    <p class="lead">Snippets utilizes Markov chains to generate random snippets from full album lyrics.</p>
+    
+    {% if not current_user.is_authenticated %}
+    <p class="lead">Log in to save your favorite snippets and upload your own album lyrics.</p>
+    {% endif %}
+
     {% if current_user.is_authenticated %}
-    <br>
     <p class="lead">
         <a href="/albums" class="btn btn-lg btn-secondary">Get Started</a>
     </p>
     {% else %}
-    <br>
     <div class="button-box col-lg-12">
         <button type="button" id="show-create-account" class="btn btn-lg btn-secondary" style="margin-right:10px;">Create an Account</button>
             <form action="/users" id="create-account" method="POST">
@@ -68,7 +71,7 @@
                     </div>
                 </div>
             </form>
-        <button type="button" id="show-login" class="btn btn-lg btn-secondary">Log In</button>
+        <button type="button" id="show-login" class="btn btn-lg btn-secondary" style="margin-right:10px;">Log In</button>
             <form action="/login" id="login" method="POST">
                 <br>
                 <div class="form-group">
@@ -82,6 +85,7 @@
                     </div>
                 </div>
             </form>
+        <a href="/albums" class="btn btn-lg btn-secondary">Test It Out</a>
     </div>
     {% endif %}
     </section>

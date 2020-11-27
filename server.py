@@ -58,6 +58,9 @@ def show_album_details(album_id):
     # Return album by album_id in db
     album = crud.get_album_by_id(album_id)
 
+    # Return artist name by artist_id in db
+    artist = crud.get_artist_name_by_id(album.artist_id)
+
     # Return songs in an album by album_id in db
     songs = crud.get_songs_by_album(album_id)
 
@@ -70,6 +73,7 @@ def show_album_details(album_id):
     chart_data = markov.most_common(lyrics)
 
     return render_template('album_details.html', album=album,
+                                                artist=artist,
                                                 songs=songs,
                                                 album_id=album_id,
                                                 chart_data=chart_data)

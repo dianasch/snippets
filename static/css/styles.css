@@ -16,6 +16,10 @@
     text-align:center;
 }
 
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
 .button-box {
     text-align:center;
     margin-top:20px;

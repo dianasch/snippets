@@ -47,7 +47,10 @@
     <h1 class="cover-heading">Let's make an original Taylor Swift song snippet!</h1>
     <p class="lead text-muted"><i class="fa fa-scissors" aria-hidden="true"></i><br>
     Snippets utilizes Markov chains to generate random snippets from full album lyrics.<br>
-    {% if not current_user.is_authenticated %}
+    {% if current_user.is_authenticated %}
+        <br>Choose a Taylor Swift album to create a snippet in the style of that album or upload your own album lyrics to create a mash-up snippet with a Taylor Swift album of your choice.<br>
+        <br>Save your favorite snippets!
+    {% else %}
     Test it out by choosing a Taylor Swift album and creating your own original snippet!
     {% endif %}
     </p>

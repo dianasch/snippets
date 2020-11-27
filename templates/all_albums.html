@@ -52,7 +52,7 @@
             {% if current_user.is_authenticated %}
             <a href="#taylor-album" class="btn btn-lg btn-outline-info" style="margin-right:10px;">Taylor Swift Albums</a>
                 {% if user_albums|length > 0 %}
-                <a href="#user-album" class="btn btn-lg btn-outline-info" style="margin-right:10px;">Your Albums</a>
+                <a href="#user-album" class="btn btn-lg btn-outline-info" style="margin-right:10px;">Your Uploaded Albums</a>
                 {% endif %}
             <a href="#upload-album" class="btn btn-lg btn-outline-info">Upload Your Own Album</a>
             {% endif %}
@@ -60,7 +60,8 @@
         </div>
     </section>
     <div class="container">
-    <h2><a name="taylor-album">Choose a Taylor Swift album</a></h2>
+    <h2><a name="taylor-album">Taylor Swift Albums</a></h2>
+    <p class="lead">Choose a Taylor Swift album to create a snippet in the style of that album.</p>
     </div>
     <div class="album py-5 bg-light">
         <div class="container">
@@ -85,7 +86,8 @@
         {% if user_albums|length > 0 %}
 
         <div class="container" style="margin-top:33px; margin-bottom: 10px;">
-            <h2><a name="user-album">Choose One of Your Uploaded Albums</a></h2>
+            <h2><a name="user-album">Your Uploaded Albums</a></h2>
+            <p class="lead">Choose one of your uploaded albums to create a mash-up snippet with a Taylor Swift album of your choice.</p>
         </div>
             <div class="album py-5 bg-light">
                 <div class="container">
@@ -108,18 +110,15 @@
     
     <div class="container" style="margin-top:33px; margin-bottom: 10px;">
         <h2><a name="upload-album">Upload Your Own Album</a></h2>
+        <p class="lead">Upload an album to create a mash-up with a Taylor Swift album for your song snippet.</p>
     </div>
 
     <div class="album py-5 bg-light">
         <div class="container">
             <div id="show-user-form" style="display: inline-block; text-align: left;">
-                <h3>Create a Mash Up</h3><br>
-                <p>Upload an album to create a mash-up with a Taylor Swift album for your song snippet.<br>
-                <strong>All fields required.</strong></p>
-                
+                <p class="lead"><strong>All fields required.</strong></p>
                 <form action="/user-album-upload" method="POST" id="user-album-upload">
                 <div class="form-group">
-                    <br>
                     <label for="artist">Artist Name:</label><br>
                     <input type="text"
                             name="artist"
@@ -146,7 +145,7 @@
                     <label for="lyrics">Full Album Lyrics:</label>
                     <textarea name="lyrics" id="lyrics" rows="10" cols="80" class="form-control" placeholder="Enter full album lyrics" required></textarea>
                 </div>
-                <input type="submit" class="btn btn-secondary">
+                <input type="submit" class="btn btn-outline-info">
                 </form>
             </div>
         </div>

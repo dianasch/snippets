@@ -165,13 +165,13 @@ const chartData = {{chart_data|tojson}};
 const bgColorList = [];
 
 for (const i in chartData[1]) {
-    bgColorList.push(`rgba(0, 102, 102, ${(chartData[1][i] / chartData[1][0]) * 2.5}`);       
+    bgColorList.push(`rgba(66, 163, 184, ${(chartData[1][i] / chartData[1][0]) * 2.5}`);       
     };
 
 const bgBorderList = [];
 
 for (const i in chartData[1]) {
-    bgColorList.push(`rgba(0, 153, 153, ${(chartData[1][i] / chartData[1][0]) * 2.5}`);       
+    bgColorList.push(`rgba(66, 163, 184, ${(chartData[1][i] / chartData[1][0]) * 2.5}`);       
     };
 
 myChart = new Chart(ctx, {

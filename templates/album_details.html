@@ -56,19 +56,15 @@
     </div>
 </section>
 
-{% if songs %}
-
-    <p>Track Listing</p>
-    {% for song in songs %}
-
-    <ul>
-        <li>{{ song.title }}</li>
-    </ul>
-    {% endfor %}
-
-{% endif %}
-
-{% if album_id | int > 8 %}
+<div class="row">
+    <div class="col-4">
+        <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+            <div class="my-3 p-3">
+            <h2 class="display-5">Another headline</h2>
+            <p class="lead">And an even wittier subheading.</p>
+            </div>
+            <div>
+            {% if album_id | int > 8 %}
 <form action='/albums/{{album.album_id}}/snippet' id ="create-snippet">
     <label for="taylor-swift-album">Choose a Taylor Swift Album for your mash-up:</label><br>
     <select name="taylor-swift-album" required>
@@ -86,6 +82,54 @@
     <button type="submit">Create snippet</button>
 </form>
 
+{% else %}
+
+<form action='/albums/{{album.album_id}}/snippet' id="create-ts-snippet">
+<button type="submit">Create snippet</button>
+</form>
+
+{% endif %}
+
+<p id="display-snippet"></p>
+
+
+            
+            </div>
+        </div>
+    </div>
+
+    <div class="col-8">
+
+            <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+                <div class="my-3 py-3">
+                    <h2 class="display-5">Another headline</h2>
+                    <p class="lead">And an even wittier subheading.</p>
+
+                </div>
+                <div class="bg-light shadow-sm mx-auto" style="width: 100%; height: 300px; border-radius: 21px 21px 0 0;">
+                    <div class="chart-container" style="position: relative; height:30vh; width:41vw">
+                        <canvas id="albumChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+    </div>
+    
+</div>
+</div>
+
+<!-- {% if songs %}
+
+    <p>Track Listing</p>
+    {% for song in songs %}
+
+    <ul>
+        <li>{{ song.title }}</li>
+    </ul>
+    {% endfor %}
+
+{% endif %} -->
+
 <script>
     $('#create-snippet').on('submit', (evt) => {
         evt.preventDefault();
@@ -100,12 +144,6 @@
         });
     });
 </script>
-
-{% else %}
-
-<form action='/albums/{{album.album_id}}/snippet' id="create-ts-snippet">
-<button type="submit">Create snippet</button>
-</form>
 
 <script>
     $('#create-ts-snippet').on('submit', (evt) => {
@@ -122,16 +160,6 @@
     });
 </script>
 
-{% endif %}
-
-
-
-<p id="display-snippet"></p>
-
-
-<div class="chart-container" style="position: relative; height:30vh; width:50vw">
-    <canvas id="albumChart"></canvas>
-</div>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <script>
 const ctx = document.getElementById('albumChart');

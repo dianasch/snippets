@@ -2,6 +2,7 @@
 // alert('This is my js code')
 
 
+
 $(document).ready(function() {
 
     $('#user-album-form').on({

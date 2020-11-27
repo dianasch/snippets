@@ -57,7 +57,7 @@
 </section>
 
 <div class="row">
-    <div class="col-4">
+    <div class="col-5">
         <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
             <div class="my-3 p-3">
             <h2 class="display-5">Another headline</h2>
@@ -79,18 +79,18 @@
         <option value="8">folklore</option>
         <option value="9">Choose a random Taylor Swift album</option>
     </select><br>
-    <button type="submit">Create snippet</button>
+    <button type="submit" class="btn btn-secondary">Create snippet</button>
 </form>
 
 {% else %}
 
 <form action='/albums/{{album.album_id}}/snippet' id="create-ts-snippet">
-<button type="submit">Create snippet</button>
+<button type="submit" class="btn btn-secondary">Create snippet</button>
 </form>
 
 {% endif %}
 
-<p id="display-snippet"></p>
+<br><p id="display-snippet"></p>
 
 
             
@@ -98,7 +98,7 @@
         </div>
     </div>
 
-    <div class="col-8">
+    <div class="col-7">
 
             <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
                 <div class="my-3 py-3">
@@ -107,7 +107,7 @@
 
                 </div>
                 <div class="bg-light shadow-sm mx-auto" style="width: 100%; height: 300px; border-radius: 21px 21px 0 0;">
-                    <div class="chart-container" style="position: relative; height:30vh; width:41vw">
+                    <div class="chart-container" style="position: relative; height:35vh; width:35vw">
                         <canvas id="albumChart"></canvas>
                     </div>
                 </div>
@@ -118,6 +118,8 @@
 </div>
 </div>
 
+
+<!--REMOVED FOR AESTHETIC REASONS-->
 <!-- {% if songs %}
 
     <p>Track Listing</p>
@@ -129,6 +131,9 @@
     {% endfor %}
 
 {% endif %} -->
+
+
+<!--JS SCRIPTS-->
 
 <script>
     $('#create-snippet').on('submit', (evt) => {

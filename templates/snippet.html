@@ -12,7 +12,7 @@
 {% if current_user.is_authenticated %}
 
 <form action="/albums/{{album.album_id}}/snippet/save" id="save-snippet">
-    <button type="submit">Save snippet</button>
+    <button type="submit" class="btn btn-secondary">Save snippet</button>
 </form> 
 {% endif %}
 

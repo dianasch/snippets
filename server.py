@@ -235,7 +235,7 @@ def register_user():
     user = crud.get_user_by_email(email)
 
     # Check that user entered values for email and password
-    if email != "" and hashed_password != "":
+    if email and hashed_password:
 
         # If there is no user with email in db
         if user == None:

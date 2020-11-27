@@ -25,11 +25,13 @@ $(document).ready(function() {
     $('#show-create-account').on({
         click: function(){
             $('#create-account').toggle();
-            if ($('#show-login').is(":visible")) {
+            if (($('#show-login').is(":visible")) && ($('#test-it-out').is(":visible"))) {
                 $('#show-login').hide();
+                $('#test-it-out').hide();
             }
             else {
                 $('#show-login').show();
+                $('#test-it-out').show();
             }
         }
     });
@@ -43,11 +45,13 @@ $(document).ready(function() {
     $('#show-login').on({
         click: function(){
             $('#login').toggle();
-            if ($('#show-create-account').is(":visible")) {
+            if (($('#show-create-account').is(":visible")) && ($('#test-it-out').is(":visible"))) {
                 $('#show-create-account').hide();
+                $('#test-it-out').hide();
             }
             else {
                 $('#show-create-account').show();
+                $('#test-it-out').show();
             }
         }
     });

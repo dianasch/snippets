@@ -58,7 +58,7 @@
         <hr class="featurette-divider">
 
         <div class="row featurette">
-            <div class="col-md-7">
+            <div class="col-md-7 order-md-2">
             <h3 class="featurette-heading" style="text-align: left;">{{ keys }}</h3><br>
                 {% for item in values['snippets'] %}
                 <ul>
@@ -66,7 +66,7 @@
                 </ul>
                 {% endfor %}
             </div>
-            <div class="col-md-5">
+            <div class="col-md-5 order-md-1">
                 <a href="/albums/{{ values['album_id'] }}"><img src="{{ values['thumbnail'] }}"></a>
             </div>
         </div>

@@ -8,20 +8,25 @@
     <br>
     <br>
     <h2 class="cover-heading">Let's make an original Taylor Swift song snippet!</h2>
-    <p class="lead text-muted"><i class="fa fa-scissors" aria-hidden="true"></i><br>
-    Snippets utilizes <a href="https://en.wikipedia.org/wiki/Markov_chain" target="_blank">Markov chains</a> to generate random snippets from full album lyrics.<br>
-    {% if current_user.is_authenticated %}
-        <br>Choose a Taylor Swift album to create a snippet in the style of that album or upload your own album lyrics to create a mash-up snippet with a Taylor Swift album of your choice.<br>
-        <br>Save your favorite snippets!
-    {% else %}
-    Test it out by choosing a Taylor Swift album and creating your own original snippet!
-    {% endif %}
-    </p>
-    
-    {% if not current_user.is_authenticated %}
-    <p class="lead text-muted">Log in to save your favorite snippets and upload your own album lyrics.</p>
-    {% endif %}
-
+    <div class="container">
+        <div class="row">
+            <div class="col-6 mx-auto">
+            <p class="lead text-muted"><i class="fa fa-scissors" aria-hidden="true"></i><br>
+            Snippets utilizes <a href="https://en.wikipedia.org/wiki/Markov_chain" target="_blank">Markov chains</a> to generate random snippets from full album lyrics.<br>
+            {% if current_user.is_authenticated %}
+                <br>Choose a Taylor Swift album to create a snippet in the style of that album or upload your own album lyrics to create a mash-up snippet with a Taylor Swift album of your choice.<br>
+                <br>Save your favorite snippets!
+            {% else %}
+            Test it out by choosing a Taylor Swift album and creating your own original snippet!
+            {% endif %}
+            </p>
+            
+            {% if not current_user.is_authenticated %}
+            <p class="lead text-muted">Log in to save your favorite snippets and upload your own album lyrics.</p>
+            {% endif %}
+            </div>
+        </div>
+    </div>
     {% if current_user.is_authenticated %}
     <p class="lead">
         <a href="/albums" class="btn btn-lg btn-primary">Get Started</a>

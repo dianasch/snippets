@@ -24,11 +24,11 @@
 
     {% if current_user.is_authenticated %}
     <p class="lead">
-        <a href="/albums" class="btn btn-lg btn-outline-info">Get Started</a>
+        <a href="/albums" class="btn btn-lg btn-primary">Get Started</a>
     </p>
     {% else %}
     <div class="button-box col-lg-12">
-        <button type="button" id="show-create-account" class="btn btn-lg btn-outline-info" style="margin-right:10px;">Create an Account</button>
+        <button type="button" id="show-create-account" class="btn btn-lg btn-primary" style="margin-right:10px;">Create an Account</button>
             <form action="/users" id="create-account" method="POST">
                 <br>
                 <div class="form-group">
@@ -37,12 +37,12 @@
                             <label><h5>Create an Account</h5></label>
                             <p>Email: <input type="text" name="email" class="form-control" placeholder="name@example.com"></p>
                             <p>Password: <input type="password" name="password" class="form-control" placeholder="password"></p>
-                            <input type="submit" class="btn btn-info">
+                            <input type="submit" class="btn btn-primary">
                         </div>
                     </div>
                 </div>
             </form>
-        <button type="button" id="show-login" class="btn btn-lg btn-outline-info" style="margin-right:10px;">Log In</button>
+        <button type="button" id="show-login" class="btn btn-lg btn-primary" style="margin-right:10px;">Log In</button>
             <form action="/login" id="login" method="POST">
                 <br>
                 <div class="form-group">
@@ -51,12 +51,12 @@
                             <label><h5>Log In</h5></label>
                             <p>Email: <input type="text" name="email" class="form-control" placeholder="name@example.com"></p>
                             <p>Password: <input type="password" name="password" class="form-control" placeholder="password"></p>
-                            <input type="submit" class="btn btn-info">
+                            <input type="submit" class="btn btn-primary">
                         </div>
                     </div>
                 </div>
             </form>
-        <a href="/albums" class="btn btn-lg btn-outline-info" id="test-it-out">Test It Out</a>
+        <a href="/albums" class="btn btn-lg btn-primary" id="test-it-out">Test It Out</a>
     </div>
     {% endif %}
     </section>

@@ -12,7 +12,7 @@
                 <img class="img-responsive" src="{{ album.thumbnail_path }}">
             </div>
             <div class="col-md-8 col-sm-12">
-                <h1>{{ album.title }}</h1><br>
+                <h2>{{ album.title }}</h2><br>
                 <p class="text-muted" style="text-align: left;">{{ album.details }}</p>
             </div>
         </div>
@@ -73,7 +73,12 @@
 </div>
 </main>
 
-
+<footer class="mastfoot mt-auto">
+    <div class="inner">
+        <br><br><p class="text-muted"><sub><i class="fa fa-scissors" aria-hidden="true"></i></sub></p>
+    </div>
+</footer>
+</div>
 <!--REMOVED FOR AESTHETIC REASONS-->
 <!-- {% if songs %}
 

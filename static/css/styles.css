@@ -12,6 +12,14 @@
     background-size: cover;
     } */
 
+/* @import "../node_modules/bootstrap/scss/functions";
+@import "../node_modules/bootstrap/scss/variables";
+@import "../node_modules/bootstrap/scss/mixins";
+
+$alert-bg-level:     -10 !default;
+$alert-border-level:  -9 !default;
+$alert-color-level:    6 !default; */
+
 .album {
     text-align:center;
 }
@@ -54,6 +62,10 @@ body {
     }
 }
 
+.cover-heading {
+    color: #006666 !important;
+}
+
 .heading-vertical-center {
     min-height: 75%;
     min-height: 75vh;
@@ -67,9 +79,13 @@ img {
     width: 238px;
 }
 
-.navbar-brand {
-    color: #006666 !important;
+.navbar {
+    background-color: rgba(0, 102, 102, .2);
 }
+
+/* .navbar-brand {
+    color: #006666 !important;
+} */
 
 ul {
     text-align: left;

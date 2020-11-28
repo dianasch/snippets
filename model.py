@@ -248,6 +248,11 @@ class Snippet_Album(db.Model):
     album = db.relationship('Album', backref='snippets_albums')
     
 
+# def test_data():
+#     """Create sample data."""
+
+#     pass
+
 if __name__ == '__main__':
     from server import app
 

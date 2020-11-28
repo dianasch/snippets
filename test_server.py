@@ -9,17 +9,24 @@ class FlaskTests(unittest.TestCase):
         self.client = app.test_client()
         app.config['TESTING'] = True
 
+    def test_homepage_response(self):
+        """Test response from homepage."""
+
+        response = self.client.get('/', content_type="html/text")
+        self.assertEqual(response.status_code, 200)
+
     def test_homepage(self):
-        """Test homepage route."""
+        """Test that homepage loads correctly."""
 
-        result = self.client.get('/')
-        self.assertIn(b'make an original Taylor Swift song snippet', result.data)
+        response = self.client.get('/')
+        self.assertIn(b'make an original Taylor Swift song snippet', response.data)
 
-    # def test_albums_page(self):
-    #     """Test albums route."""
+    def test_correct_login(self):
+        """Test login success with correct credentials."""
+    
+    def incorrect_login(self): 
 
-    #     result = self.client.get('/albums')
-    #     self.assertIn(b'Taylor Swift album', result.data)
+    
 
 
 if __name__ == '__main__':

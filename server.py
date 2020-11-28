@@ -246,7 +246,9 @@ def register_user():
 
             # Create new user
             crud.create_user(email, hashed_password)
-            flash("Account created! You can now log in.", "success")
+            user = crud.get_user_by_email(email)
+            login_user(user)
+            flash("Account created! You are now logged in.", "success")
         
         # Otherwise, notify user that email already in db
         else:    

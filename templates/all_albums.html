@@ -30,7 +30,7 @@
         <div class="container">
             <div class="row">
             {% for album in ts_albums %}
-                <div class="col-xl-3 col-sm-12 col-md-4 mx-auto">
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 mx-auto">
                     <div class="card mb-3 shadow-sm" style="width: 15rem;">
                         <a href = "/albums/{{album.album_id}}"><img src={{album.thumbnail_path}}></a>
                         <div class="card-body">
@@ -56,8 +56,8 @@
                 <div class="container">
                     <div class="row">
                     {% for album in user_albums %}
-                        <div class="col-3">
-                            <div class="card mb-3 mx-auto shadow-sm">
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                            <div class="card mb-3 mx-auto shadow-sm" style="width: 15rem;">
                                 <a href="/albums/{{album.album_id}}"><img src={{album.thumbnail_path}}></a>
                                 <div class="card-body">
                                     <p class="card-text">{{album.title}}</p>

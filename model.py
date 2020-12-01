@@ -258,6 +258,10 @@ def test_data():
     Snippet.query.delete()
     Snippet_Album.query.delete()
 
+    test_user = User(user_id=100,
+                email="testuser@testuser.com",
+                password="testpassword")
+
     john = Artist(artist_id=100, name="John Lennon")
     paul = Artist(artist_id=200, name="Paul McCartney")
 
@@ -266,9 +270,9 @@ def test_data():
                 thumbnail_path="https://upload.wikimedia.org/wikipedia/en/6/69/ImagineCover.jpg",
                 details="Imagine is the second studio album by English musician John Lennon, released on 9 September 1971 by Apple Records.",
                 full_lyrics="Let's pretend that these are the full lyrics for this album",
-                artist_id=100)
+                artist_id=100)                
     mccartney = Album(album_id=200,
-                title="McCartney")
+                title="McCartney",
                 thumbnail_path="https://upload.wikimedia.org/wikipedia/en/thumb/0/0a/McCartney1970albumcover.jpg/220px-McCartney1970albumcover.jpg",
                 details="McCartney is the debut solo album by English musician Paul McCartney, released on 17 April 1970 by Apple Records.",
                 full_lyrics="Paul McCartney puts words together to a melody how great is that",
@@ -277,20 +281,43 @@ def test_data():
     imag_song1 = Song(song_id=100,
             title="Imagine",
             album_id=100)
-
     imag_song2 = Song(song_id=200,
             title="Crippled Inside",
             album_id=100)
-
     mc_song1 = Song(song_id=300,
-            title="The Lovely Linda"),
+            title="The Lovely Linda",
             album_id=200)
-
     mc_song2 = Song(song_id=400,
-            title="That Would Be Something"),
+            title="That Would Be Something",
             album_id=200)
 
-    db.session.add_all([john, paul, imagine, mccartney, imag_song1, imag_song2, mc_song1, mc_song2])
+    snip1 = Snippet(snippet_id=100,
+                    text="I'm a little Markov snippet! Yay!",
+                    user_id=100)
+    snip2 = Snippet(snippet_id=200,
+                    test="I am also a little Markov snippet. Whoo!",
+                    user_id=100)
+
+    snip_al1 = Snippet_Album(snippet_album_id=100,
+                            snippet_id=100,
+                            album_id=100)
+    snip_al2 = Snippet_Album(snippet_album_id=200,
+                            snippet_id=200,
+                            album_id=200)
+
+    db.session.add_all([test_user,
+                        john,
+                        paul,
+                        imagine,
+                        mccartney,
+                        imag_song1,
+                        imag_song2,
+                        mc_song1,
+                        mc_song2,
+                        snip1,
+                        snip2,
+                        snip_al1,
+                        snip_al2])
     db.session.commit()
 
 

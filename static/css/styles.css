@@ -32,6 +32,7 @@ body {
     color: white !important;
     outline:  #006666 !important;
     border: none;
+    margin-bottom: 10px;
 }
 
 .button-box {

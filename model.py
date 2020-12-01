@@ -248,10 +248,51 @@ class Snippet_Album(db.Model):
     album = db.relationship('Album', backref='snippets_albums')
     
 
-# def test_data():
-#     """Create sample data."""
+def test_data():
+    """Create sample data."""
 
-#     pass
+    User.query.delete()
+    Artist.query.delete()
+    Album.query.delete()
+    Song.query.delete()
+    Snippet.query.delete()
+    Snippet_Album.query.delete()
+
+    john = Artist(artist_id=100, name="John Lennon")
+    paul = Artist(artist_id=200, name="Paul McCartney")
+
+    imagine = Album(album_id=100,
+                title="Imagine",
+                thumbnail_path="https://upload.wikimedia.org/wikipedia/en/6/69/ImagineCover.jpg",
+                details="Imagine is the second studio album by English musician John Lennon, released on 9 September 1971 by Apple Records.",
+                full_lyrics="Let's pretend that these are the full lyrics for this album",
+                artist_id=100)
+    mccartney = Album(album_id=200,
+                title="McCartney")
+                thumbnail_path="https://upload.wikimedia.org/wikipedia/en/thumb/0/0a/McCartney1970albumcover.jpg/220px-McCartney1970albumcover.jpg",
+                details="McCartney is the debut solo album by English musician Paul McCartney, released on 17 April 1970 by Apple Records.",
+                full_lyrics="Paul McCartney puts words together to a melody how great is that",
+                artist_id=200)
+
+    imag_song1 = Song(song_id=100,
+            title="Imagine",
+            album_id=100)
+
+    imag_song2 = Song(song_id=200,
+            title="Crippled Inside",
+            album_id=100)
+
+    mc_song1 = Song(song_id=300,
+            title="The Lovely Linda"),
+            album_id=200)
+
+    mc_song2 = Song(song_id=400,
+            title="That Would Be Something"),
+            album_id=200)
+
+    db.session.add_all([john, paul, imagine, mccartney, imag_song1, imag_song2, mc_song1, mc_song2])
+    db.session.commit()
+
 
 if __name__ == '__main__':
     from server import app

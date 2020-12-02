@@ -29,6 +29,10 @@ body {
     width: 252px;
 }
 
+h2 {
+    font-family: 'Permanent Marker', cursive;
+}
+
 .heading-vertical-center {
     min-height: 75%;
     min-height: 75vh;

@@ -48,6 +48,14 @@ class FlaskTests(unittest.TestCase):
                                 follow_redirects=True)
         self.assertIn(b"There is already an account associated with this email.", response.data)
 
+    def test_registration_with_no_input(self):
+        """Test creating an account with an existing email."""
+
+        response = self.client.post("/users",
+                                data=dict(email="", password=""),
+                                follow_redirects=True)
+        self.assertIn(b"Please enter an email and a password.", response.data)
+
     def test_login(self):
         """Test login route."""
 

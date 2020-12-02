@@ -48,6 +48,15 @@ class FlaskTests(unittest.TestCase):
                                 follow_redirects=True)
         self.assertIn(b"Logged in!", response.data)
 
+    def test_bad_password(self):
+        """Test log in with a bad password."""
+
+        response = self.client.post("/login",
+                        data=dict(email="user@user.com", password="wrong_password"),
+                        follow_redirects=True)
+        self.assertIn(b"Email and password do not match.", response.data)
+
+
     def tearDown(self):
         """Do at end of every test."""
 

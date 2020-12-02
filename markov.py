@@ -93,15 +93,6 @@ def make_text(chains):
 # print(random_text)
 
 
-# f = open_and_read_file('folklore.txt')
-# f2 = open_and_read_file('1989.txt')
-# f3 = open_and_read_file('Lover.txt')
-# f4 = open_and_read_file('Fearless.txt')
-# f5 = open_and_read_file('reputation.txt')
-# f6 = open_and_read_file('Speak Now.txt')
-# f7 = open_and_read_file('Taylor Swift.txt')
-# f8 = open_and_read_file('Red.txt')
-
 def most_common(text):
 
     # Remove certain punctuation from album lyrics

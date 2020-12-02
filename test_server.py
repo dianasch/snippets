@@ -40,6 +40,14 @@ class FlaskTests(unittest.TestCase):
                                 follow_redirects=True)
         self.assertIn(b"Account created!", response.data)
 
+    def test_registration_with_existing_email(self):
+        """Test creating an account with an existing email."""
+
+        response = self.client.post("/users",
+                                data=dict(email="user@user.com", password="password"),
+                                follow_redirects=True)
+        self.assertIn(b"There is already an account associated with this email.", response.data)
+
     def test_login(self):
         """Test login route."""
 

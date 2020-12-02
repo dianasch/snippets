@@ -161,7 +161,7 @@ def save_snippet(album_id):
 
 @app.route('/user-album-upload', methods = ['POST'])
 def add_user_upload_to_db():
-    """Adds new album to db from user input form."""
+    """Add new album to db from user input form."""
 
     # Get user input from album upload form
     artist = request.form.get('artist')
@@ -169,6 +169,8 @@ def add_user_upload_to_db():
     thumbnail = request.form.get('thumbnail')
     description = request.form.get('description')
     lyrics = request.form.get('lyrics')
+
+    # Get user id of current user
     user_id = current_user.get_id()
 
     # If artist not already in db
@@ -190,15 +192,6 @@ def add_user_upload_to_db():
 
     return redirect('/albums')
 
-# REMOVED THIS ROUTE FOR SECURITY PURPOSES
-# @app.route('/all-users')
-# def show_all_users():
-#     """View all users."""
-
-#     # Return all users in db
-#     users = crud.return_all_users()
-
-#     return render_template('all_users.html', users=users)
 
 @app.route('/user/<user_id>')
 def user_details(user_id):
@@ -229,11 +222,14 @@ def user_details(user_id):
 
 @app.route('/users', methods = ['POST'] )
 def register_user():
-    """Get inputs from create account form."""
+    """Get inputs from create account form and create user."""
 
-    # Return inputs from create account form
+    # Return email input from create account form
     email = request.form.get('email')
-    hashed_password = generate_password_hash(request.form.get('password'), method="sha256")
+
+    # Return hashed password from create account form
+    hashed_password = generate_password_hash(request.form.get('password'),
+                                            method="sha256")
 
     # Return user by email in db
     user = crud.get_user_by_email(email)
@@ -247,6 +243,8 @@ def register_user():
             # Create new user
             crud.create_user(email, hashed_password)
             user = crud.get_user_by_email(email)
+
+            # Login user
             login_user(user)
             flash("Account created! You are now logged in.", "success")
         

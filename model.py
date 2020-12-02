@@ -246,21 +246,13 @@ class Snippet_Album(db.Model):
 
     # Create SQLAlchemy relationship between albums and snippets_albums)
     album = db.relationship('Album', backref='snippets_albums')
-    
 
 def test_data():
     """Create sample data."""
 
-    User.query.delete()
-    Artist.query.delete()
-    Album.query.delete()
-    Song.query.delete()
-    Snippet.query.delete()
-    Snippet_Album.query.delete()
-
-    test_user = User(user_id=100,
-                email="testuser@testuser.com",
-                password="testpassword")
+    test_user = User(user_id=200,
+                email="user@user.com",
+                password="sha256$hDVr2q8k$64e2f0a06896f372d879a6b3e4a1ee422cd5c90161719be09b657e34de8181e9")
 
     john = Artist(artist_id=100, name="John Lennon")
     paul = Artist(artist_id=200, name="Paul McCartney")
@@ -293,10 +285,10 @@ def test_data():
 
     snip1 = Snippet(snippet_id=100,
                     text="I'm a little Markov snippet! Yay!",
-                    user_id=100)
+                    user_id=200)
     snip2 = Snippet(snippet_id=200,
-                    test="I am also a little Markov snippet. Whoo!",
-                    user_id=100)
+                    text="I am also a little Markov snippet. Whoo!",
+                    user_id=200)
 
     snip_al1 = Snippet_Album(snippet_album_id=100,
                             snippet_id=100,

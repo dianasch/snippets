@@ -34,7 +34,7 @@ This web app utilizes Markov chains to generate random song snippets from Taylor
 
 ## Installation:
 
-### Requirements:
+### Requirements
 
 * PostgreSQL
 * Python 3.7.3
@@ -80,6 +80,7 @@ Create the database:
 Seed the database:
 
 ```
+(env) $ python3 model.py
 (env) $ python3 seed.py
 ```
 

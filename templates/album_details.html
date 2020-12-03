@@ -62,11 +62,13 @@
                 <h4 class="display-5">Which words appear the most in {{ album.title }}?</h4>
                 <p class="text-muted">"{{ chart_data[0][0] }}" and "{{ chart_data[0][1] }}" sure are popular with {{ artist }}.</p>
             </div>
-            <div class="bg-light shadow-sm mx-auto" style="width: 100%; height: 300px; border-radius: 21px 21px 0 0;">
-                <div class="chart-container" style="position: relative; height:34vh; width:32vw">
+            <div class="bg-light shadow-sm mx-auto" style="width: 100%; height: 310px; border-radius: 21px 21px 0 0;">
+                <div class="chart-container" style="position: relative; height:30vh; width:32vw">
                     <canvas id="albumChart"></canvas>
                 </div>
+                <div class="container">
                 <p class="text-muted"><sub>Certain stop words have been omitted from chart data (e.g. 'the,' 'and,' 'a,' etc.).</sub></p>
+                </div>
             </div>
         </div>
     </div>

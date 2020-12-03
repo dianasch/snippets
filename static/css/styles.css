@@ -50,6 +50,10 @@ img {
     background-color: rgba(0, 102, 102, .2);
 }
 
+.navbar-brand {
+    font-family: 'Permanent Marker', cursive;
+}
+
 ul {
     text-align: left;
     justify-content: normal;

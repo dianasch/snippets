@@ -38,6 +38,9 @@ Saved snippets can be viewed:
 
 ![alt text](https://github.com/dianasch/snippets/blob/main/static/gifs/my-snippets.gif "My snippets page displaying saved snippets")
 
+Users who are logged in can also upload their own album lyrics to create a mash-up snippet with an existing Taylor Swfit album:
+
+![alt text](https://github.com/dianasch/snippets/commit/cbd56187b0eaeee7039a29cbbfe6ceb03ce7c148 "Upload album lyrics form")
 
 ## Installation:
 

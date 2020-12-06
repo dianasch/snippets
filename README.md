@@ -40,7 +40,7 @@ Saved snippets can be viewed on the "My Snippets" page:
 
 Users who are logged in can also upload their own album lyrics to create a mash-up snippet with an existing Taylor Swfit album:
 
-![alt text](https://github.com/dianasch/snippets/commit/cbd56187b0eaeee7039a29cbbfe6ceb03ce7c148 "Upload album lyrics form")
+![alt text](https://github.com/dianasch/snippets/blob/main/static/gifs/upload-album.gif "Upload album lyrics form")
 
 From there, users can view their uploaded albums and create snippets:
 

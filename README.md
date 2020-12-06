@@ -1,7 +1,11 @@
 # Hackbright Academy Capstone Project
-Hackbright Academy Full-Stack Software Engineering Program
+### Hackbright Academy Full-Stack Software Engineering Program
 
 This web app utilizes Markov chains to generate random song snippets from Taylor Swift's full album lyrics. Non-registered users can view all Taylor Swift albums and create song snippets. Registered users can save their favorite snippets and create snippet mash-ups with their own uploaded albums. Taylor Swift album details are retrieved from the Audio DB API. The most common words in each album are displayed using Chart.js.
+
+### Snippets Demo Video
+
+[![Watch the video](https://img.youtube.com/vi/EMqwaaNgIbo/maxresdefault.jpg)](https://www.youtube.com/watch?v=EMqwaaNgIbo)
 
 ## Technologies
 * Python

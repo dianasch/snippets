@@ -46,7 +46,7 @@ Users who are logged in can also upload their own album lyrics to create a mash-
 
 ![alt text](https://github.com/dianasch/snippets/blob/main/static/gifs/upload-album.gif "Upload album lyrics form")
 
-From there, users can view their uploaded albums and create snippets:
+From there, users can view their uploaded albums and create a mash-up snippet with any Taylor Swift album:
 
 ![alt text](https://github.com/dianasch/snippets/blob/main/static/gifs/mash-up.gif "Creating a mash-up snippet from a user-uploaded album")
 

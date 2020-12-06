@@ -3,7 +3,7 @@ Hackbright Academy Full-Stack Software Engineering Program
 
 This web app utilizes Markov chains to generate random song snippets from Taylor Swift's full album lyrics. Non-registered users can view all Taylor Swift albums and create song snippets. Registered users can save their favorite snippets and create snippet mash-ups with their own uploaded albums. Taylor Swift album details are retrieved from the Audio DB API. The most common words in each album are displayed using Chart.js.
 
-## Technologies:
+## Technologies
 * Python
 * Flask
 * Jinja
@@ -15,7 +15,7 @@ This web app utilizes Markov chains to generate random song snippets from Taylor
 * jQuery
 * Javascript (AJAX)
 
-## Features:
+## Features
 
 Users can create an account and log in:
 
@@ -46,7 +46,7 @@ From there, users can view their uploaded albums and create snippets:
 
 ![alt text](https://github.com/dianasch/snippets/blob/main/static/gifs/mash-up.gif "Creating a mash-up snippet from a user-uploaded album")
 
-## Installation:
+## Installation
 
 ### Requirements
 

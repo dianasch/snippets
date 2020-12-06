@@ -17,13 +17,18 @@ This web app utilizes Markov chains to generate random song snippets from Taylor
 
 ## Features:
 
-Users can create an account and log in.
+Users can create an account and log in:
+
 ![alt text](https://github.com/dianasch/snippets/blob/main/static/gifs/create-account.gif "Create an account form")
 ![alt text](https://github.com/dianasch/snippets/blob/main/static/gifs/login.gif "Log in form")
 
-Non-registered users are able to test out the app and view all Taylor Swift studio albums.
-![alt text](https://github.com/dianasch/snippets/blob/main/static/gifs/all-albums.gif "All Taylor Swift albums")
+Non-registered users are able to test out the app and view all Taylor Swift studio albums:
 
+![alt text](https://github.com/dianasch/snippets/blob/main/static/gifs/all-albums.gif "Displaying all Taylor Swift albums")
+
+Users who are not logged in can view Taylor Swift album details and create a snippet:
+
+![alt text](https://github.com/dianasch/snippets/blob/main/static/gifs/create-snippet.gif "Creating a snippet on an album details page")
 * User can create song snippets and save them
 * User can view all saved song snippets
 

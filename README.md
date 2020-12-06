@@ -36,7 +36,7 @@ Users who are logged in can save their favorite snippets:
 
 Saved snippets can be viewed:
 
-![alt text](https://github.com/dianasch/snippets/blob/main/static/gifs/my-snippets.gif "Saving a snippet")
+![alt text](https://github.com/dianasch/snippets/blob/main/static/gifs/my-snippets.gif "My snippets page displaying saved snippets")
 
 
 ## Installation:

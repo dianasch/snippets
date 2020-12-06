@@ -29,17 +29,11 @@ Non-registered users are able to test out the app and view all Taylor Swift stud
 Users who are not logged in can view Taylor Swift album details and create a snippet:
 
 ![alt text](https://github.com/dianasch/snippets/blob/main/static/gifs/create-snippet.gif "Creating a snippet on an album details page")
-* User can create song snippets and save them
-* User can view all saved song snippets
 
-### 2.0
-* User can view saved song snippets by album
-* User can upload their own album lyrics to create a Taylor Swift mash-up
-* Album details page contains a chart displaying the most common words in that album
-* Additional log-in and registration security
+Users who are logged in can save their favorite snippets:
 
-### Future Implementations
-* User can share snippets via text and/or email
+![alt text](https://github.com/dianasch/snippets/blob/main/static/gifs/save-snippet.gif "Saving a snippet")
+
 
 ## Installation:
 

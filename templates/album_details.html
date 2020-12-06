@@ -30,7 +30,7 @@
             <div class="dropdown">
                 {% if album_id | int > 8 %}
                 <form action='/albums/{{album.album_id}}/snippet' id ="create-snippet">
-                    <label for="taylor-swift-album" class="text-muted">Choose a Taylor Swift Album for a mash-up:</label><br>
+                    <label for="taylor-swift-album" class="text-muted">Choose a Taylor Swift album for a mash-up:</label><br>
                     <select class="form-control" name="taylor-swift-album" required>
                         <option disabled selected value> -- Select an option -- </option>
                         <option value="1">Taylor Swift</option>

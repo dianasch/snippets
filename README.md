@@ -109,3 +109,9 @@ Start the backend server:
 ```
 
 Open a new window and visit this address: http://0.0.0.0:5000/ to view the Snippets app.
+
+## Future Implementation
+
+* Adding Twilio so users can share their favorite snippets
+* Creating pagination for users' saved snippets
+* Building out more testing for functionality and routes

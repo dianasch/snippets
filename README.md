@@ -19,6 +19,25 @@ This web app utilizes Markov chains to generate random song snippets from Taylor
 * jQuery
 * Javascript (AJAX)
 
+## Overview
+
+### MVP
+
+- WebApp for user to view all Taylor Swift studio albums
+- User registration and log-in
+- User can view all details for each studio album
+- User can create song snippet and save it
+- User can view all saved song snippets
+
+### 2.0
+
+- Non-logged in users are able to view albums and create snippets
+- Users are able to upload their own album lyrics
+- Users are able to create a mash-up snippet with uploaded albums and any Taylor Swift album
+- Display saved snippets by album for each user
+- Display most common words from each album using Chart.js
+- Added log-in and registration security with Flask Login Manager and Werkzeug security
+
 ## Features
 
 Users can create an account and log in:
